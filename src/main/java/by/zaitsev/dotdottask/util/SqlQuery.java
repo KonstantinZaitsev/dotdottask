@@ -85,6 +85,32 @@ public final class SqlQuery {
         }
     }
 
+    /**
+     * Tags is an inner class containing queries to access the tags table.
+     *
+     * @author Konstantin Zaitsev
+     * @see SqlQuery
+     */
+    public static final class Tags {
+        public static final String FIND_ENTITY_BY_ID = """
+                SELECT tag_id, user_id, name, color
+                FROM tags
+                WHERE tag_id = ?""";
+        public static final String FIND_ALL_ENTITIES = """
+                SELECT tag_id, user_id, name, color
+                FROM tags""";
+        public static final String INSERT_NEW_ENTITY = """
+                INSERT INTO tags(user_id, name, color)
+                VALUES (?, ?, ?)""";
+        public static final String DELETE_ENTITY_BY_ID = """
+                DELETE
+                FROM tags
+                WHERE tag_id = ?""";
+
+        private Tags() {
+        }
+    }
+
     private SqlQuery() {
     }
 }
