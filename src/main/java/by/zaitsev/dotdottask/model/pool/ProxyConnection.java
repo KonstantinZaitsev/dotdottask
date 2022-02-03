@@ -36,8 +36,12 @@ record ProxyConnection(Connection connection) implements Connection {
         connection.close();
     }
 
+    /**
+     * Instead of closing the {@link Connection}, the method returns it to the {@link ConnectionPool}.
+     */
     @Override
-    public void close() {   //TODO: implement a method that returns connections back to the connection pool
+    public void close() {
+        ConnectionPool.getInstance().releaseConnection(this);
     }
 
     @Override
