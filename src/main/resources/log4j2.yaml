@@ -1,0 +1,36 @@
+Configuration:
+  status: error
+  Properties:
+    property:
+      - name: log_dir
+        value: ${sys:catalina.home}/logs
+      - name: pattern_file
+        value: "%d{DATE} [%t] %-5level %logger{6} : %M - %msg%n"
+      - name: pattern_console
+        value: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n"
+  Appenders:
+    Console:
+      name: Console
+      target: SYSTEM_OUT
+      PatternLayout:
+        Pattern: ${pattern_console}
+    RollingFile:
+      name: FileRolling
+      fileName: ${log_dir}/array.log
+      append: true
+      filePattern: ${log_dir}/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.txt
+      PatternLayout:
+        Pattern: ${pattern_file}
+      Policies:
+        SizeBasedTriggeringPolicy:
+          size: 50 KB
+      DefaultRolloverStrategy:
+        max: 15
+  Loggers:
+    Root:
+      level: trace
+      AppenderRef:
+        - ref: FileRolling
+          level: trace
+        - ref: Console
+          level: trace
