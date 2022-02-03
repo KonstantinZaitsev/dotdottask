@@ -17,6 +17,7 @@ ext {
     postgresDriverVersion = '42.3.2'
     jstlVersion = '2.0.0'
     jacksonVersion = '2.13.1'
+    jspVersion = '3.0.0'
 
     junitVersion = '5.8.2'
 }
@@ -30,6 +31,7 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     compileOnly "jakarta.servlet:jakarta.servlet-api:${servletVersion}"
+    compileOnly "jakarta.servlet.jsp:jakarta.servlet.jsp-api:${jspVersion}"
 
     implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
     implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
