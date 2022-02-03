@@ -16,6 +16,7 @@ ext {
     log4jVersion = '2.17.1'
     postgresDriverVersion = '42.3.2'
     jstlVersion = '2.0.0'
+    jacksonVersion = '2.13.1'
 
     junitVersion = '5.8.2'
 }
@@ -34,6 +35,8 @@ dependencies {
     implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
     implementation "org.postgresql:postgresql:${postgresDriverVersion}"
     implementation "org.glassfish.web:jakarta.servlet.jsp.jstl:${jstlVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonVersion}"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
