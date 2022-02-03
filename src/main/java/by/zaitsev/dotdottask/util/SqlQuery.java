@@ -33,6 +33,32 @@ public final class SqlQuery {
         }
     }
 
+    /**
+     * Projects is an inner class containing queries to access the projects table.
+     *
+     * @author Konstantin Zaitsev
+     * @see SqlQuery
+     */
+    public static final class Projects {
+        public static final String FIND_ENTITY_BY_ID = """
+                SELECT project_id, owner_id, title, color, description
+                FROM projects
+                WHERE project_id = ?""";
+        public static final String FIND_ALL_ENTITIES = """
+                SELECT project_id, owner_id, title, color, description
+                FROM projects""";
+        public static final String INSERT_NEW_ENTITY = """
+                INSERT INTO projects(owner_id, title, color, description)
+                VALUES (?, ?, ?, ?)""";
+        public static final String DELETE_ENTITY_BY_ID = """
+                DELETE
+                FROM projects
+                WHERE project_id = ?""";
+
+        private Projects() {
+        }
+    }
+
     private SqlQuery() {
     }
 }
