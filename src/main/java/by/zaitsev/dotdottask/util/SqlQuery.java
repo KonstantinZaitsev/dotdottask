@@ -59,6 +59,32 @@ public final class SqlQuery {
         }
     }
 
+    /**
+     * Tasks is an inner class containing queries to access the tasks table.
+     *
+     * @author Konstantin Zaitsev
+     * @see SqlQuery
+     */
+    public static final class Tasks {
+        public static final String FIND_ENTITY_BY_ID = """
+                SELECT task_id, project_id, title, description, creation_date, deadline, is_done, assigned_user_id
+                FROM tasks
+                WHERE task_id = ?""";
+        public static final String FIND_ALL_ENTITIES = """
+                SELECT task_id, project_id, title, description, creation_date, deadline, is_done, assigned_user_id
+                FROM tasks""";
+        public static final String INSERT_NEW_ENTITY = """
+                INSERT INTO tasks(project_id, title, description, deadline, assigned_user_id)
+                VALUES (?, ?, ?, ?, ?)""";
+        public static final String DELETE_ENTITY_BY_ID = """
+                DELETE
+                FROM tasks
+                WHERE task_id = ?""";
+
+        private Tasks() {
+        }
+    }
+
     private SqlQuery() {
     }
 }
