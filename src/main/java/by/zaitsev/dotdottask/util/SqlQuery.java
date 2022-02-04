@@ -31,6 +31,10 @@ public final class SqlQuery {
         public static final String INSERT_NEW_USER = """
                 INSERT INTO users(email, encrypted_password, name, surname, image)
                 VALUES (?, ?, ?, ?, ?)""";
+        public static final String FIND_USER_BY_EMAIL = """
+                SELECT user_id, email, encrypted_password, name, surname, image
+                FROM users
+                WHERE email = ?""";
 
         private Users() {
         }
