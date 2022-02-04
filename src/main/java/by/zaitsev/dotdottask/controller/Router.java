@@ -1,5 +1,7 @@
 package by.zaitsev.dotdottask.controller;
 
+import by.zaitsev.dotdottask.util.PagePath;
+
 import java.util.StringJoiner;
 
 /**
@@ -16,6 +18,11 @@ public class Router {
     public enum RouterType {
         FORWARD,
         REDIRECT
+    }
+
+    public Router() {
+        pagePath = PagePath.INDEX_PAGE;
+        routerType = RouterType.FORWARD;
     }
 
     public boolean hasError() {
