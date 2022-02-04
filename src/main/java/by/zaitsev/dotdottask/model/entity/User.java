@@ -12,7 +12,12 @@ public class User extends AbstractEntity {
     private String name;
     private String surname;
     private String image;
-    private boolean isAuthorized = false;
+    private UserRole userRole = UserRole.GUEST;
+
+    public enum UserRole {
+        USER,
+        GUEST
+    }
 
     public String getEmail() {
         return email;
@@ -46,12 +51,12 @@ public class User extends AbstractEntity {
         this.image = image;
     }
 
-    public boolean isAuthorized() {
-        return isAuthorized;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setAuthorized(boolean authorized) {
-        isAuthorized = authorized;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     @Override
@@ -60,7 +65,7 @@ public class User extends AbstractEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         User that = (User) o;
-        return isAuthorized == that.isAuthorized &&
+        return userRole == that.userRole &&
                 email != null ? email.equals(that.email) : that.email == null &&
                 name != null ? name.equals(that.name) : that.name == null &&
                 surname != null ? surname.equals(that.surname) : that.surname == null &&
@@ -74,6 +79,7 @@ public class User extends AbstractEntity {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);
+        result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
         return result;
     }
 
@@ -85,7 +91,7 @@ public class User extends AbstractEntity {
                 .add("name='" + name + "'")
                 .add("surname='" + surname + "'")
                 .add("image='" + image + "'")
-                .add("isAuthorized=" + isAuthorized)
+                .add("userRole=" + userRole)
                 .toString();
     }
 }
