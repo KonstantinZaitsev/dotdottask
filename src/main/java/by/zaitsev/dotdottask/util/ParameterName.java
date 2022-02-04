@@ -7,6 +7,7 @@ package by.zaitsev.dotdottask.util;
  */
 public final class ParameterName {
     public static final String COMMAND = "command";
+    public static final String LOCALE = "locale";
 
     private ParameterName() {
     }
