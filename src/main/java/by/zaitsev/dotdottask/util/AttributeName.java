@@ -8,6 +8,7 @@ package by.zaitsev.dotdottask.util;
 public final class AttributeName {
     public static final String WRONG_COMMAND = "wrong_command";
     public static final String USER = "user";
+    public static final String CURRENT_PAGE = "current_page";
 
     private AttributeName() {
     }
