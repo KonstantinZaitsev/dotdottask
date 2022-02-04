@@ -28,6 +28,9 @@ public final class SqlQuery {
                 DELETE
                 FROM users
                 WHERE user_id = ?""";
+        public static final String INSERT_NEW_USER = """
+                INSERT INTO users(email, encrypted_password, name, surname, image)
+                VALUES (?, ?, ?, ?, ?)""";
 
         private Users() {
         }
