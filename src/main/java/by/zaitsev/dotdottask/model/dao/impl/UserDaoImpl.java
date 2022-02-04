@@ -4,14 +4,17 @@ import by.zaitsev.dotdottask.exception.DaoException;
 import by.zaitsev.dotdottask.model.dao.UserDao;
 import by.zaitsev.dotdottask.model.entity.User;
 import by.zaitsev.dotdottask.model.pool.ConnectionPool;
+import by.zaitsev.dotdottask.util.DefaultImageProvider;
 import by.zaitsev.dotdottask.util.ParameterIndex;
 import by.zaitsev.dotdottask.util.SqlQuery;
+import by.zaitsev.dotdottask.util.TableColumn;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -98,5 +101,32 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException("Unable to delete user from database. Database access error: ", e);
         }
         return isDeleted;
+    }
+
+    @Override
+    public long insertNewUser(User user, String encryptedPassword) throws DaoException {
+        long id = 0;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(SqlQuery.Users.INSERT_NEW_USER,
+                     Statement.RETURN_GENERATED_KEYS)) {
+            var defaultImageProvider = DefaultImageProvider.getInstance();
+            preparedStatement.setString(ParameterIndex.FIRST, user.getEmail());
+            preparedStatement.setString(ParameterIndex.SECOND, encryptedPassword);
+            preparedStatement.setString(ParameterIndex.THIRD, user.getName());
+            preparedStatement.setString(ParameterIndex.FOURTH, user.getSurname());
+            preparedStatement.setBytes(ParameterIndex.FIFTH, defaultImageProvider.getDefaultUserImage());
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                id = resultSet.getLong(TableColumn.Users.USER_ID);
+            }
+            logger.log(Level.DEBUG, "insertNewUser(User user, String encryptedPassword) method was completed " +
+                    "successfully. User " + (id != 0 ? "with id {} was added" : "wasn't added"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to insert new user. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to insert new user. Database access error: ", e);
+        }
+        return id;
     }
 }
