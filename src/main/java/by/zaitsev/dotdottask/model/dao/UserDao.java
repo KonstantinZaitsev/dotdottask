@@ -3,6 +3,8 @@ package by.zaitsev.dotdottask.model.dao;
 import by.zaitsev.dotdottask.exception.DaoException;
 import by.zaitsev.dotdottask.model.entity.User;
 
+import java.util.Optional;
+
 /**
  * UserDao is an interface implemented by classes that will access the users table.
  *
@@ -16,4 +18,12 @@ public interface UserDao extends BaseDao<User> {
      * @throws DaoException if the request to database could not be handled.
      */
     long insertNewUser(User user, String encryptedPassword) throws DaoException;
+
+    /**
+     * @param email user email to search.
+     * @return an user wrapped in {@link Optional} if it exists in the database or empty {@link Optional} if it does
+     * not exist in the database.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    Optional<User> findUserByEmail(String email) throws DaoException;
 }
