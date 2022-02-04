@@ -1,5 +1,6 @@
 package by.zaitsev.dotdottask.controller.command;
 
+import by.zaitsev.dotdottask.controller.command.impl.common.ChangeLocaleCommand;
 import by.zaitsev.dotdottask.controller.command.impl.common.NonExistentCommand;
 import by.zaitsev.dotdottask.model.entity.User;
 
@@ -12,7 +13,8 @@ import java.util.EnumSet;
  * @author Konstantin Zaitsev
  */
 public enum CommandType {
-    NON_EXISTENT_COMMAND(new NonExistentCommand(), EnumSet.of(User.UserRole.USER, User.UserRole.GUEST));
+    NON_EXISTENT_COMMAND(new NonExistentCommand(), EnumSet.of(User.UserRole.USER, User.UserRole.GUEST)),
+    CHANGE_LOCALE_COMMAND(new ChangeLocaleCommand(), EnumSet.of(User.UserRole.USER, User.UserRole.GUEST));
 
     private final Command command;
     private final EnumSet<User.UserRole> allowedRoles;
