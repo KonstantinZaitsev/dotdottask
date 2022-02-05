@@ -147,4 +147,21 @@ public class UserServiceImpl implements UserService {
         }
         return id;
     }
+
+    @Override
+    public Optional<User> findUserByEmailAndPassword(String email, String password) throws ServiceException {
+        Optional<User> optionalUser;
+        String encryptedPassword = PasswordEncryptor.getInstance().encrypt(password);
+        try {
+            optionalUser = userDao.findUserByEmailAndPassword(email, encryptedPassword);
+            logger.log(Level.DEBUG, "findUserByEmailAndPassword(String email, String password) method was completed " +
+                    "successfully. User with email {} " +
+                    (optionalUser.isPresent() ? "was found" : "don't exist"), email);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to find user by email and password. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to find user by email and password. Dao access error: ", e);
+        }
+        return optionalUser;
+    }
 }
