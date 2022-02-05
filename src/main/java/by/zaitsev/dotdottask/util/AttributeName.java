@@ -19,6 +19,7 @@ public final class AttributeName {
     public static final String INVALID_NAME = "invalid_name";
     public static final String INVALID_SURNAME = "invalid_surname";
     public static final String REGISTRATION_RESULT = "registration_result";
+    public static final String SIGN_IN_RESULT = "sign_in_result";
 
     private AttributeName() {
     }
