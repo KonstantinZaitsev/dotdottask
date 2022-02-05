@@ -6,6 +6,7 @@
 <fmt:message key="header.about" var="about"/>
 <fmt:message key="header.language" var="language"/>
 <fmt:message key="header.button.get-started" var="button_get_started"/>
+<fmt:message key="header.button.sign-in" var="button_sign_in"/>
 
 <jsp:useBean id="user" scope="session" type="by.zaitsev.dotdottask.model.entity.User"/>
 
@@ -44,7 +45,9 @@
                 </li>
             </ul>
             <c:if test="${user.userRole eq 'GUEST'}">
-                <a href="#" class="getstarted">${button_get_started}</a>
+                <a href="${abs}/controller?command=go_to_sign_up_page_command"
+                   class="getstarted">${button_get_started}</a>
+                <a href="${abs}/controller?command=go_to_sign_in_page_command" class="getstarted">${button_sign_in}</a>
             </c:if>
         </nav>
     </div>
