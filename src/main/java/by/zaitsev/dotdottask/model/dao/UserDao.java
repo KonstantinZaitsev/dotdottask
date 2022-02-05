@@ -21,7 +21,7 @@ public interface UserDao extends BaseDao<User> {
 
     /**
      * @param email user email to search.
-     * @return an user wrapped in {@link Optional} if it exists in the database or empty {@link Optional} if it does
+     * @return a user wrapped in {@link Optional} if it exists in the database or empty {@link Optional} if it does
      * not exist in the database.
      * @throws DaoException if the request to database could not be handled.
      */
