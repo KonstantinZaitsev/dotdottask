@@ -35,6 +35,11 @@ public final class SqlQuery {
                 SELECT user_id, email, encrypted_password, name, surname, image
                 FROM users
                 WHERE email = ?""";
+        public static final String FIND_USER_BY_EMAIL_AND_PASSWORD = """
+                SELECT user_id, email, encrypted_password, name, surname, image
+                FROM users
+                WHERE email = ?
+                  AND encrypted_password = ?""";
 
         private Users() {
         }
