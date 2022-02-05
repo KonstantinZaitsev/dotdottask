@@ -5,6 +5,7 @@ import by.zaitsev.dotdottask.controller.command.impl.common.NonExistentCommand;
 import by.zaitsev.dotdottask.controller.command.impl.guest.SignInCommand;
 import by.zaitsev.dotdottask.controller.command.impl.guest.SignUpCommand;
 import by.zaitsev.dotdottask.controller.command.impl.navigation.GoToCatalogPagePathCommand;
+import by.zaitsev.dotdottask.controller.command.impl.navigation.GoToIndexPageCommand;
 import by.zaitsev.dotdottask.controller.command.impl.navigation.GoToSignInPageCommand;
 import by.zaitsev.dotdottask.controller.command.impl.navigation.GoToSignUpPageCommand;
 import by.zaitsev.dotdottask.model.entity.User;
@@ -24,7 +25,8 @@ public enum CommandType {
     SIGN_IN_COMMAND(new SignInCommand(), EnumSet.of(User.UserRole.GUEST)),
     GO_TO_CATALOG_PAGE_COMMAND(new GoToCatalogPagePathCommand(), EnumSet.of(User.UserRole.GUEST)),
     GO_TO_SIGN_IN_PAGE_COMMAND(new GoToSignInPageCommand(), EnumSet.of(User.UserRole.GUEST)),
-    GO_TO_SIGN_UP_PAGE_COMMAND(new GoToSignUpPageCommand(), EnumSet.of(User.UserRole.GUEST));
+    GO_TO_SIGN_UP_PAGE_COMMAND(new GoToSignUpPageCommand(), EnumSet.of(User.UserRole.GUEST)),
+    GO_TO_INDEX_PAGE_COMMAND(new GoToIndexPageCommand(), EnumSet.of(User.UserRole.GUEST));
 
     private final Command command;
     private final EnumSet<User.UserRole> allowedRoles;
