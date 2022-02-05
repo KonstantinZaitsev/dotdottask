@@ -4,8 +4,9 @@ import by.zaitsev.dotdottask.controller.command.impl.common.ChangeLocaleCommand;
 import by.zaitsev.dotdottask.controller.command.impl.common.NonExistentCommand;
 import by.zaitsev.dotdottask.controller.command.impl.guest.SignInCommand;
 import by.zaitsev.dotdottask.controller.command.impl.guest.SignUpCommand;
-import by.zaitsev.dotdottask.controller.command.impl.navigation.GoToAuthorizationPageCommand;
 import by.zaitsev.dotdottask.controller.command.impl.navigation.GoToCatalogPagePathCommand;
+import by.zaitsev.dotdottask.controller.command.impl.navigation.GoToSignInPageCommand;
+import by.zaitsev.dotdottask.controller.command.impl.navigation.GoToSignUpPageCommand;
 import by.zaitsev.dotdottask.model.entity.User;
 
 import java.util.EnumSet;
@@ -21,8 +22,9 @@ public enum CommandType {
     CHANGE_LOCALE_COMMAND(new ChangeLocaleCommand(), EnumSet.of(User.UserRole.USER, User.UserRole.GUEST)),
     SIGN_UP_COMMAND(new SignUpCommand(), EnumSet.of(User.UserRole.GUEST)),
     SIGN_IN_COMMAND(new SignInCommand(), EnumSet.of(User.UserRole.GUEST)),
-    GO_TO_AUTHORIZATION_PAGE_COMMAND(new GoToAuthorizationPageCommand(), EnumSet.of(User.UserRole.GUEST)),
-    GO_TO_CATALOG_PAGE_COMMAND(new GoToCatalogPagePathCommand(), EnumSet.of(User.UserRole.GUEST));
+    GO_TO_CATALOG_PAGE_COMMAND(new GoToCatalogPagePathCommand(), EnumSet.of(User.UserRole.GUEST)),
+    GO_TO_SIGN_IN_PAGE_COMMAND(new GoToSignInPageCommand(), EnumSet.of(User.UserRole.GUEST)),
+    GO_TO_SIGN_UP_PAGE_COMMAND(new GoToSignUpPageCommand(), EnumSet.of(User.UserRole.GUEST));
 
     private final Command command;
     private final EnumSet<User.UserRole> allowedRoles;

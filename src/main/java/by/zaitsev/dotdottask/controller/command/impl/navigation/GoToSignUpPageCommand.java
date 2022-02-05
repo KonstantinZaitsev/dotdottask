@@ -9,15 +9,15 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class GoToAuthorizationPageCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(GoToAuthorizationPageCommand.class);
+public class GoToSignUpPageCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(GoToSignUpPageCommand.class);
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         var router = new Router();
-        router.setPagePath(PagePath.AUTHORIZATION_PAGE);
+        router.setPagePath(PagePath.SIGN_UP_PAGE);
         logger.log(Level.DEBUG, "execute(HttpServletRequest request) method was completed successfully. " +
-                "Forwarded to authorization page");
+                "Forwarded to sign up page");
         return router;
     }
 }

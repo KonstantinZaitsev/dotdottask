@@ -35,7 +35,7 @@ public class SignInCommand implements Command {
                 router.setPagePath(PagePath.CATALOG_PAGE);
             } else {
                 request.setAttribute(AttributeName.SIGN_IN_RESULT, false);
-                router.setPagePath(PagePath.AUTHORIZATION_PAGE);
+                router.setPagePath(PagePath.SIGN_IN_PAGE);
             }
             logger.log(Level.DEBUG, "execute(HttpServletRequest request) method was completed successfully. " +
                     "Forwarded to catalog page");

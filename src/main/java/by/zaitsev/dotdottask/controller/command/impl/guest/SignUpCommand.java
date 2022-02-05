@@ -37,6 +37,7 @@ public class SignUpCommand implements Command {
             long id = UserServiceImpl.getInstance().insertNewUser(parameterMap);
             boolean isRegistered = id != 0;
             if (!isRegistered) {
+                router.setPagePath(PagePath.SIGN_UP_PAGE);
                 for (String key : parameterMap.keySet()) {
                     String validationResult = parameterMap.get(key);
                     if (Boolean.parseBoolean(validationResult)) {
@@ -63,11 +64,14 @@ public class SignUpCommand implements Command {
                         }
                     }
                 }
+                logger.log(Level.DEBUG, "execute(HttpServletRequest request) method was completed " +
+                        "successfully. Forwarded to sign up page page");
+            } else {
+                router.setPagePath(PagePath.SIGN_IN_PAGE);
+                logger.log(Level.DEBUG, "execute(HttpServletRequest request) method was completed " +
+                        "successfully. Forwarded to sign in page");
             }
             request.setAttribute(AttributeName.REGISTRATION_RESULT, isRegistered);
-            router.setPagePath(PagePath.AUTHORIZATION_PAGE);
-            logger.log(Level.DEBUG, "execute(HttpServletRequest request) method was completed successfully. " +
-                    "Forwarded to authorization page");
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "User cannot be registered: {}", e.getMessage());
             throw new CommandException("Student cannot be registered: ", e);
