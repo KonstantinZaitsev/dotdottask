@@ -149,4 +149,28 @@ public class UserDaoImpl implements UserDao {
         }
         return optionalUser;
     }
+
+    @Override
+    public Optional<User> findUserByEmailAndPassword(String email, String encryptedPassword) throws DaoException {
+        Optional<User> optionalUser = Optional.empty();
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Users.FIND_USER_BY_EMAIL_AND_PASSWORD)) {
+            preparedStatement.setString(ParameterIndex.FIRST, email);
+            preparedStatement.setString(ParameterIndex.SECOND, encryptedPassword);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                var user = (User) EntityFactory.USER.build(resultSet);
+                optionalUser = Optional.of(user);
+            }
+            logger.log(Level.DEBUG, "findUserByEmailAndPassword(String email, String encryptedPassword) " +
+                    "method was completed successfully. User with email {} " +
+                    (optionalUser.isPresent() ? "was found" : "don't exist"), email);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to find user by email and password. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to find user by email and password. Database access error: ", e);
+        }
+        return optionalUser;
+    }
 }

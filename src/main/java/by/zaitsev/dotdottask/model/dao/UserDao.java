@@ -26,4 +26,13 @@ public interface UserDao extends BaseDao<User> {
      * @throws DaoException if the request to database could not be handled.
      */
     Optional<User> findUserByEmail(String email) throws DaoException;
+
+    /**
+     * @param email             user email to search.
+     * @param encryptedPassword sha-256 encrypted user password.
+     * @return a user wrapped in {@link Optional} if it exists in the database or empty {@link Optional} if it does
+     * not exist in the database.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    Optional<User> findUserByEmailAndPassword(String email, String encryptedPassword) throws DaoException;
 }
