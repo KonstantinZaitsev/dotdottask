@@ -21,6 +21,7 @@
     400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/>
     <link href="${abs}/css/authorization.css" rel="stylesheet">
     <title>${title}</title>
 </head>
@@ -29,44 +30,50 @@
     <div class="content">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6" data-aos="fade-up">
                     <img src="${abs}/image/authorization-bg.svg" class="img-fluid" alt="">
                 </div>
                 <div class="col-md-6 contents">
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="mb-4">
-                                <h3>${header_first}</h3>
-                                <p class="mb-4">${header_second}</p>
+                                <h3 data-aos="zoom-out" data-aos-delay="200">${header_first}</h3>
+                                <p class="mb-4" data-aos="zoom-out" data-aos-delay="300">${header_second}</p>
                             </div>
                             <form action="${abs}/controller" method="post">
                                 <input type="hidden" name="command" value="sign_in_command">
                                 <div class="form-group first">
                                     <label for="email"></label>
                                     <input type="email" name="email" placeholder="${form_email}" class="form-control"
-                                           id="email" minlength="6" maxlength="50" required>
+                                           id="email" minlength="6" maxlength="50" required data-aos="zoom-out"
+                                           data-aos-delay="500">
                                 </div>
                                 <div class="form-group last mb-4">
                                     <label for="password"></label>
                                     <input type="password" name="password" placeholder="${form_password}"
-                                           class="form-control" id="password" minlength="6" maxlength="30" required>
+                                           class="form-control" id="password" minlength="6" maxlength="30" required
+                                           data-aos="zoom-out" data-aos-delay="700">
                                 </div>
-                                <div class="d-flex mb-5 align-items-center">
+                                <div class="d-flex mb-5 align-items-center" data-aos="zoom-out" data-aos-delay="800">
                                     <span class="ml-auto"><a href="#" class="forgot-pass">${forgot_password}</a></span>
                                 </div>
-                                <input type="submit" value="${button}" class="btn btn-block btn-primary">
-                                <div class="error">
+                                <input type="submit" value="${button}" class="btn btn-block btn-primary"
+                                       data-aos="zoom-out" data-aos-delay="1000">
+                                <div class="error" data-aos="zoom-out" data-aos-delay="1000">
                                     <c:if test="${sign_in_result eq 'false'}">
                                         <small>${error}</small>
                                     </c:if>
                                 </div>
-                                <span class="d-block text-left my-4 text-muted">&mdash; ${or_sign_up} &mdash;</span>
-                                <a href="${abs}/controller?command=go_to_index_page_command"
+                                <span class="d-block text-left my-4 text-muted" data-aos="zoom-out"
+                                      data-aos-delay="1000">&mdash; ${or_sign_up} &mdash;</span>
+                                <a href="${abs}/controller?command=go_to_index_page_command" data-aos="zoom-out"
+                                   data-aos-delay="1200"
                                    class="btn d-inline-flex align-items-center justify-content-center align-self-center">
                                     <span>${back}</span>
                                     <i class="bi-arrow-right"></i>
                                 </a>
-                                <a href="${abs}/controller?command=go_to_sign_up_page_command"
+                                <a href="${abs}/controller?command=go_to_sign_up_page_command" data-aos="zoom-out"
+                                   data-aos-delay="1200"
                                    class="btn d-inline-flex align-items-center justify-content-center align-self-center">
                                     <span>${sign_up}</span>
                                     <i class="bi-arrow-right"></i>
@@ -80,6 +87,7 @@
     </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script src="${abs}/js/authorization.js"></script>
 </body>
 </html>
