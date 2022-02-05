@@ -6,6 +6,7 @@
 
 <html>
 <head>
+    <link href="${abs}/image/favicon.ico" rel="icon">
     <link href="${abs}/css/footer.css" rel="stylesheet">
     <title>${title}</title>
 </head>
