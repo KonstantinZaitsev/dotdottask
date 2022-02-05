@@ -38,6 +38,7 @@ enum EntityFactory {
                 user.setName(resultSet.getString(TableColumn.Users.NAME));
                 user.setSurname(resultSet.getString(TableColumn.Users.SURNAME));
                 user.setImage(imageEncoder.encodeImage(resultSet.getBytes(TableColumn.Users.IMAGE)));
+                user.setUserRole(User.UserRole.USER);
                 yield user;
             }
             case PROJECT -> {
