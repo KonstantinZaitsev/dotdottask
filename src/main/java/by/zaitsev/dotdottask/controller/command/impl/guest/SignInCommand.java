@@ -17,6 +17,11 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
+/**
+ * SignInCommand is the command used to sign in to an account in the application.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class SignInCommand implements Command {
     private static final Logger logger = LogManager.getLogger(SignInCommand.class);
 

@@ -9,6 +9,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * GoToCatalogPagePathCommand is the class used to navigate to the catalog page.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class GoToCatalogPagePathCommand implements Command {
     private static final Logger logger = LogManager.getLogger(GoToCatalogPagePathCommand.class);
 

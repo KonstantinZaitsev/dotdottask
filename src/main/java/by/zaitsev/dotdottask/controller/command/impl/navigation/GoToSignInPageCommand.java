@@ -9,6 +9,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * GoToSignInPageCommand is the class used to navigate to the sign-in page.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class GoToSignInPageCommand implements Command {
     private static final Logger logger = LogManager.getLogger(GoToSignInPageCommand.class);
 
