@@ -70,7 +70,13 @@ public final class SqlQuery {
                 SELECT project_id, owner_id, title, color, description
                 FROM projects
                          LEFT JOIN users on owner_id = users.user_id
-                WHERE user_id = projects.owner_id = ?""";
+                WHERE user_id = ?""";
+        public static final String FIND_ALL_USER_INVITED_PROJECTS_BY_ID = """
+                SELECT projects.project_id, owner_id, title, color, description
+                FROM projects
+                         LEFT JOIN projects_users on projects.project_id = projects_users.project_id
+                         LEFT JOIN users on projects_users.user_id = users.user_id
+                WHERE users.user_id = ?""";
 
         private Projects() {
         }
@@ -97,6 +103,11 @@ public final class SqlQuery {
                 DELETE
                 FROM tasks
                 WHERE task_id = ?""";
+        public static final String FIND_ALL_TASKS_BY_PROJECT_ID = """
+                SELECT task_id, tasks.project_id, tasks.title, tasks.description, creation_date, deadline, is_done, assigned_user_id
+                FROM tasks
+                         LEFT JOIN projects ON tasks.project_id = projects.project_id
+                WHERE projects.project_id = ?""";
 
         private Tasks() {
         }
