@@ -92,4 +92,17 @@ public class TaskServiceImpl implements TaskService {
         }
         return isDeleted;
     }
+
+    @Override
+    public List<Task> findAllTasksByProjectId(long id) throws ServiceException {
+        List<Task> taskList;
+        try {
+            taskList = taskDao.findAllTasksByProjectId(id);
+            logger.log(Level.DEBUG, "findAllTasksByProjectId(long id) method was completed successfully");
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to find tasks by project id. Dao access error: {}", e.getMessage());
+            throw new ServiceException("Unable to find tasks by project id. Dao access error: ", e);
+        }
+        return taskList;
+    }
 }
