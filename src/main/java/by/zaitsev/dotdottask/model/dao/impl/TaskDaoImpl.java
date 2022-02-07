@@ -121,4 +121,25 @@ public class TaskDaoImpl implements TaskDao {
         }
         return isDeleted;
     }
+
+    @Override
+    public List<Task> findAllTasksByProjectId(long id) throws DaoException {
+        List<Task> taskList = new ArrayList<>();
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Tasks.FIND_ALL_TASKS_BY_PROJECT_ID)) {
+            preparedStatement.setLong(ParameterIndex.FIRST, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                var task = (Task) EntityFactory.TASK.build(resultSet);
+                taskList.add(task);
+            }
+            logger.log(Level.DEBUG, "findAllTasksByProjectId(long id) method was completed successfully");
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to find tasks by project id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to find tasks by project id. Database access error: ", e);
+        }
+        return taskList;
+    }
 }
