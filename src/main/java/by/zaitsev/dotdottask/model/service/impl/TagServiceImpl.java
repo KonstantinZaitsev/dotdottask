@@ -92,4 +92,17 @@ public class TagServiceImpl implements TagService {
         }
         return isDeleted;
     }
+
+    @Override
+    public List<Tag> findAllTagsByTaskId(long id) throws ServiceException {
+        List<Tag> tagList;
+        try {
+            tagList = tagDao.findAllTagsByTaskId(id);
+            logger.log(Level.DEBUG, "findAllTagsByTaskId(long id) method was completed successfully");
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to find tags by task id. Dao access error: {}", e.getMessage());
+            throw new ServiceException("Unable to find tags by task id. Dao access error: ", e);
+        }
+        return tagList;
+    }
 }
