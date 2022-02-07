@@ -1,5 +1,6 @@
 package by.zaitsev.dotdottask.util;
 
+import jakarta.xml.bind.DatatypeConverter;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +21,6 @@ public class PasswordEncryptor {
     private static final Logger logger = LogManager.getLogger(PasswordEncryptor.class);
     private static final String ENCRYPT_ALGORITHM = "sha-256";
     private static final String SALT_KEY = "5hr8Uh32Hr";
-    private static final int PASSWORD_SIZE = 64;
     private static PasswordEncryptor instance;
 
     private PasswordEncryptor() {
@@ -41,20 +41,17 @@ public class PasswordEncryptor {
      * @return sha-256 encrypted password.
      */
     public String encrypt(String password) {
-        StringBuilder encryptedPassword = new StringBuilder(PASSWORD_SIZE);
+        String encryptedPassword;
         byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
         byte[] saltBytes = SALT_KEY.getBytes(StandardCharsets.UTF_8);
         try {
             MessageDigest digest = MessageDigest.getInstance(ENCRYPT_ALGORITHM);
             digest.update(saltBytes);
-            byte[] resultBytes = digest.digest(passwordBytes);
-            for (byte next : resultBytes) {
-                encryptedPassword.append(next);
-            }
+            encryptedPassword = DatatypeConverter.printHexBinary(digest.digest(passwordBytes));
         } catch (NoSuchAlgorithmException e) {
             logger.log(Level.ERROR, "Password cannot be encrypted: {}", e.getMessage());
             throw new RuntimeException("Password cannot be encrypted: ", e);
         }
-        return encryptedPassword.toString();
+        return encryptedPassword;
     }
 }
