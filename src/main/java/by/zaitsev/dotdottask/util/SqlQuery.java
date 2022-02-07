@@ -66,6 +66,11 @@ public final class SqlQuery {
                 DELETE
                 FROM projects
                 WHERE project_id = ?""";
+        public static final String FIND_ALL_USER_OWN_PROJECTS_BY_ID = """
+                SELECT project_id, owner_id, title, color, description
+                FROM projects
+                         LEFT JOIN users on owner_id = users.user_id
+                WHERE user_id = projects.owner_id = ?""";
 
         private Projects() {
         }
