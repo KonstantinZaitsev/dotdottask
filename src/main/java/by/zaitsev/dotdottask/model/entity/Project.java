@@ -1,5 +1,6 @@
 package by.zaitsev.dotdottask.model.entity;
 
+import java.util.List;
 import java.util.StringJoiner;
 
 /**
@@ -12,7 +13,7 @@ public class Project extends AbstractEntity {
     private String title;
     private String color;
     private String description;
-
+    private List<Task> taskList;
 
     public long getOwnerId() {
         return ownerId;
@@ -46,6 +47,14 @@ public class Project extends AbstractEntity {
         this.description = description;
     }
 
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -61,7 +70,8 @@ public class Project extends AbstractEntity {
         return ownerId == that.ownerId &&
                 title != null ? title.equals(that.title) : that.title == null &&
                 color != null ? color.equals(that.color) : that.color == null &&
-                description != null ? description.equals(that.description) : that.description == null;
+                description != null ? description.equals(that.description) : that.description == null &&
+                taskList != null ? taskList.equals(that.taskList) : that.taskList == null;
     }
 
     @Override
@@ -71,6 +81,7 @@ public class Project extends AbstractEntity {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (color != null ? color.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (taskList != null ? taskList.hashCode() : 0);
         return result;
     }
 
@@ -82,6 +93,7 @@ public class Project extends AbstractEntity {
                 .add("title='" + title + "'")
                 .add("color='" + color + "'")
                 .add("description='" + description + "'")
+                .add("taskList=" + taskList)
                 .toString();
     }
 }

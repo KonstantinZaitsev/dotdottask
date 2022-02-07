@@ -5,7 +5,9 @@ import by.zaitsev.dotdottask.exception.ServiceException;
 import by.zaitsev.dotdottask.model.dao.ProjectDao;
 import by.zaitsev.dotdottask.model.dao.impl.ProjectDaoImpl;
 import by.zaitsev.dotdottask.model.entity.Project;
+import by.zaitsev.dotdottask.model.entity.Task;
 import by.zaitsev.dotdottask.model.service.ProjectService;
+import by.zaitsev.dotdottask.model.service.TaskService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,6 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
     private static final Logger logger = LogManager.getLogger(ProjectServiceImpl.class);
     private static ProjectServiceImpl instance;
     private final ProjectDao projectDao = ProjectDaoImpl.getInstance();
+    private final TaskService taskService = TaskServiceImpl.getInstance();
 
     private ProjectServiceImpl() {
     }
@@ -41,6 +44,12 @@ public class ProjectServiceImpl implements ProjectService {
         Optional<Project> optionalProject;
         try {
             optionalProject = projectDao.findEntityById(id);
+            if (optionalProject.isPresent()) {
+                List<Task> taskList = taskService.findAllTasksByProjectId(id);
+                Project project = optionalProject.get();
+                project.setTaskList(taskList);
+                optionalProject = Optional.of(project);
+            }
             logger.log(Level.DEBUG, "findEntityById(long id) method was completed successfully. " +
                     "Project with id {} " + (optionalProject.isPresent() ? "was found" : "don't exist"), id);
         } catch (DaoException e) {
@@ -55,6 +64,10 @@ public class ProjectServiceImpl implements ProjectService {
         List<Project> projectList;
         try {
             projectList = projectDao.findAllEntities();
+            for (Project project : projectList) {
+                List<Task> taskList = taskService.findAllTasksByProjectId(project.getId());
+                project.setTaskList(taskList);
+            }
             logger.log(Level.DEBUG, "findAllEntities() method was completed successfully");
         } catch (DaoException e) {
             logger.log(Level.ERROR, "Unable to find all projects. Dao access error: {}", e.getMessage());
@@ -98,6 +111,10 @@ public class ProjectServiceImpl implements ProjectService {
         List<Project> projectList;
         try {
             projectList = projectDao.findAllUserOwnProjectsById(id);
+            for (Project project : projectList) {
+                List<Task> taskList = taskService.findAllTasksByProjectId(project.getId());
+                project.setTaskList(taskList);
+            }
             logger.log(Level.DEBUG, "findAllUserOwnProjectsById(long id) method was completed successfully");
         } catch (DaoException e) {
             logger.log(Level.ERROR, "Unable to find user's own projects. Dao access error: {}", e.getMessage());
@@ -111,6 +128,10 @@ public class ProjectServiceImpl implements ProjectService {
         List<Project> projectList;
         try {
             projectList = projectDao.findAllUserInvitedProjectsById(id);
+            for (Project project : projectList) {
+                List<Task> taskList = taskService.findAllTasksByProjectId(project.getId());
+                project.setTaskList(taskList);
+            }
             logger.log(Level.DEBUG, "findAllUserInvitedProjectsById(long id) method was completed " +
                     "successfully");
         } catch (DaoException e) {

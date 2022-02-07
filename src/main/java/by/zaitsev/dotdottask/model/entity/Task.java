@@ -1,6 +1,7 @@
 package by.zaitsev.dotdottask.model.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.StringJoiner;
 
 /**
@@ -16,6 +17,7 @@ public class Task extends AbstractEntity {
     private Timestamp deadline;
     private boolean isDone;
     private long assignedUserId;
+    private List<Tag> tagList;
 
     public long getProjectId() {
         return projectId;
@@ -73,6 +75,14 @@ public class Task extends AbstractEntity {
         this.assignedUserId = assignedUserId;
     }
 
+    public List<Tag> getTagList() {
+        return tagList;
+    }
+
+    public void setTagList(List<Tag> tagList) {
+        this.tagList = tagList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -91,7 +101,8 @@ public class Task extends AbstractEntity {
                 title != null ? title.equals(that.title) : that.title == null &&
                 description != null ? description.equals(that.description) : that.description == null &&
                 creationDate != null ? creationDate.equals(that.creationDate) : that.creationDate == null &&
-                deadline != null ? deadline.equals(that.deadline) : that.deadline == null;
+                deadline != null ? deadline.equals(that.deadline) : that.deadline == null &&
+                tagList != null ? tagList.equals(that.tagList) : that.tagList == null;
     }
 
     @Override
@@ -104,6 +115,7 @@ public class Task extends AbstractEntity {
         result = 31 * result + (deadline != null ? deadline.hashCode() : 0);
         result = 31 * result + (isDone ? 1 : 0);
         result = 31 * result + (int) (assignedUserId ^ (assignedUserId >>> 32));
+        result = 31 * result + (tagList != null ? tagList.hashCode() : 0);
         return result;
     }
 
@@ -118,6 +130,7 @@ public class Task extends AbstractEntity {
                 .add("deadline=" + deadline)
                 .add("isDone=" + isDone)
                 .add("assignedUserId=" + assignedUserId)
+                .add("tagList=" + tagList)
                 .toString();
     }
 }

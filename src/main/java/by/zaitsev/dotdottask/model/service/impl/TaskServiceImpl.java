@@ -4,7 +4,9 @@ import by.zaitsev.dotdottask.exception.DaoException;
 import by.zaitsev.dotdottask.exception.ServiceException;
 import by.zaitsev.dotdottask.model.dao.TaskDao;
 import by.zaitsev.dotdottask.model.dao.impl.TaskDaoImpl;
+import by.zaitsev.dotdottask.model.entity.Tag;
 import by.zaitsev.dotdottask.model.entity.Task;
+import by.zaitsev.dotdottask.model.service.TagService;
 import by.zaitsev.dotdottask.model.service.TaskService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +24,7 @@ public class TaskServiceImpl implements TaskService {
     private static final Logger logger = LogManager.getLogger(TaskServiceImpl.class);
     private static TaskServiceImpl instance;
     private final TaskDao taskDao = TaskDaoImpl.getInstance();
+    private final TagService tagService = TagServiceImpl.getInstance();
 
     private TaskServiceImpl() {
     }
@@ -41,6 +44,12 @@ public class TaskServiceImpl implements TaskService {
         Optional<Task> optionalTask;
         try {
             optionalTask = taskDao.findEntityById(id);
+            if (optionalTask.isPresent()) {
+                List<Tag> tagList = tagService.findAllTagsByTaskId(id);
+                Task task = optionalTask.get();
+                task.setTagList(tagList);
+                optionalTask = Optional.of(task);
+            }
             logger.log(Level.DEBUG, "findEntityById(long id) method was completed successfully. " +
                     "Task with id {} " + (optionalTask.isPresent() ? "was found" : "don't exist"), id);
         } catch (DaoException e) {
@@ -55,6 +64,10 @@ public class TaskServiceImpl implements TaskService {
         List<Task> taskList;
         try {
             taskList = taskDao.findAllEntities();
+            for (Task task : taskList) {
+                List<Tag> tagList = tagService.findAllTagsByTaskId(task.getId());
+                task.setTagList(tagList);
+            }
             logger.log(Level.DEBUG, "findAllEntities() method was completed successfully");
         } catch (DaoException e) {
             logger.log(Level.ERROR, "Unable to find all tasks. Dao access error: {}", e.getMessage());
@@ -98,6 +111,10 @@ public class TaskServiceImpl implements TaskService {
         List<Task> taskList;
         try {
             taskList = taskDao.findAllTasksByProjectId(id);
+            for (Task task : taskList) {
+                List<Tag> tagList = tagService.findAllTagsByTaskId(task.getId());
+                task.setTagList(tagList);
+            }
             logger.log(Level.DEBUG, "findAllTasksByProjectId(long id) method was completed successfully");
         } catch (DaoException e) {
             logger.log(Level.ERROR, "Unable to find tasks by project id. Dao access error: {}", e.getMessage());
