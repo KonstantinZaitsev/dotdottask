@@ -4,7 +4,9 @@ import by.zaitsev.dotdottask.controller.Router;
 import by.zaitsev.dotdottask.controller.command.Command;
 import by.zaitsev.dotdottask.exception.CommandException;
 import by.zaitsev.dotdottask.exception.ServiceException;
+import by.zaitsev.dotdottask.model.entity.Project;
 import by.zaitsev.dotdottask.model.entity.User;
+import by.zaitsev.dotdottask.model.service.impl.ProjectServiceImpl;
 import by.zaitsev.dotdottask.model.service.impl.UserServiceImpl;
 import by.zaitsev.dotdottask.util.AttributeName;
 import by.zaitsev.dotdottask.util.PagePath;
@@ -15,6 +17,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -36,6 +39,11 @@ public class SignInCommand implements Command {
             if (optionalUser.isPresent()) {
                 var user = optionalUser.get();
                 session.setAttribute(AttributeName.USER, user);
+                var projectService = ProjectServiceImpl.getInstance();
+                List<Project> ownProjects = projectService.findAllUserOwnProjectsById(user.getId());
+                session.setAttribute(AttributeName.OWN_PROJECTS, ownProjects);
+                List<Project> invitedProjects = projectService.findAllUserInvitedProjectsById(user.getId());
+                session.setAttribute(AttributeName.INVITED_PROJECTS, invitedProjects);
                 request.setAttribute(AttributeName.SIGN_IN_RESULT, true);
                 router.setPagePath(PagePath.CATALOG_PAGE);
             } else {
