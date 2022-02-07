@@ -92,4 +92,32 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return isDeleted;
     }
+
+    @Override
+    public List<Project> findAllUserOwnProjectsById(long id) throws ServiceException {
+        List<Project> projectList;
+        try {
+            projectList = projectDao.findAllUserOwnProjectsById(id);
+            logger.log(Level.DEBUG, "findAllUserOwnProjectsById(long id) method was completed successfully");
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to find user's own projects. Dao access error: {}", e.getMessage());
+            throw new ServiceException("Unable to find user's own projects. Dao access error: ", e);
+        }
+        return projectList;
+    }
+
+    @Override
+    public List<Project> findAllUserInvitedProjectsById(long id) throws ServiceException {
+        List<Project> projectList;
+        try {
+            projectList = projectDao.findAllUserInvitedProjectsById(id);
+            logger.log(Level.DEBUG, "findAllUserInvitedProjectsById(long id) method was completed " +
+                    "successfully");
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to find user's invited projects. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to find user's invited projects. Dao access error: ", e);
+        }
+        return projectList;
+    }
 }
