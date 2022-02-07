@@ -9,8 +9,6 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.annotation.WebInitParam;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
@@ -23,7 +21,6 @@ import java.io.IOException;
         dispatcherTypes = DispatcherType.INCLUDE,
         initParams = {@WebInitParam(name = "encoding", value = "utf-8")})
 public class EncodingFilter implements Filter {
-    private static final Logger logger = LogManager.getLogger(EncodingFilter.class);
     private static final String ENCODING = "encoding";
     private String code;
 

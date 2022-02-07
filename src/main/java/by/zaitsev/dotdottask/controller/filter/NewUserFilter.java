@@ -10,9 +10,6 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -25,8 +22,6 @@ import java.util.Optional;
 @WebFilter(urlPatterns = "/*",
         dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.INCLUDE, DispatcherType.FORWARD})
 public class NewUserFilter implements Filter {
-    private static final Logger logger = LogManager.getLogger(NewUserFilter.class);
-
     @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
@@ -37,10 +32,7 @@ public class NewUserFilter implements Filter {
         if (optionalUser.isEmpty()) {
             var user = new User();
             httpSession.setAttribute(AttributeName.USER, user);
-            logger.log(Level.DEBUG, "New user added to session");
         }
-        logger.log(Level.DEBUG, "doFilter(ServletRequest request, ServletResponse response, FilterChain " +
-                "chain) method was completed successfully.");
         chain.doFilter(request, response);
     }
 }

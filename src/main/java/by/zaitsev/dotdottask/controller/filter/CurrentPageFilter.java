@@ -11,9 +11,6 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
@@ -27,7 +24,6 @@ import java.io.IOException;
         initParams = {@WebInitParam(name = "PAGES_ROOT_DIRECTORY", value = "/jsp"),
                 @WebInitParam(name = "INDEX_PAGE", value = "/index.jsp")})
 public class CurrentPageFilter implements Filter {
-    private static final Logger logger = LogManager.getLogger(CurrentPageFilter.class);
     private String root;
     private String indexPage;
 
@@ -49,8 +45,6 @@ public class CurrentPageFilter implements Filter {
             currentPage = requestUri.substring(rootFirstIndex);
         }
         httpRequest.getSession().setAttribute(AttributeName.CURRENT_PAGE, currentPage);
-        logger.log(Level.DEBUG, "doFilter(ServletRequest request, ServletResponse response, FilterChain " +
-                "chain) method was completed successfully.");
         chain.doFilter(request, response);
     }
 }
