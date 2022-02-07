@@ -119,4 +119,24 @@ public class TagDaoImpl implements TagDao {
         }
         return isDeleted;
     }
+
+    @Override
+    public List<Tag> findAllTagsByTaskId(long id) throws DaoException {
+        List<Tag> tagList = new ArrayList<>();
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Tags.FIND_ALL_TAGS_BY_TASK_ID)) {
+            preparedStatement.setLong(ParameterIndex.FIRST, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                var tag = (Tag) EntityFactory.TAG.build(resultSet);
+                tagList.add(tag);
+            }
+            logger.log(Level.DEBUG, "findAllTagsByTaskId(long id) method was completed successfully");
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to find tags by task id. Database access error: {}", e.getMessage());
+            throw new DaoException("Unable to find tags by task id. Database access error: ", e);
+        }
+        return tagList;
+    }
 }
