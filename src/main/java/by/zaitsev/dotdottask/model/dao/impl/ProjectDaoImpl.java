@@ -121,4 +121,47 @@ public class ProjectDaoImpl implements ProjectDao {
         }
         return isDeleted;
     }
+
+    @Override
+    public List<Project> findAllUserOwnProjectsById(long id) throws DaoException {
+        List<Project> projectList = new ArrayList<>();
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Projects.FIND_ALL_USER_OWN_PROJECTS_BY_ID)) {
+            preparedStatement.setLong(ParameterIndex.FIRST, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                var project = (Project) EntityFactory.PROJECT.build(resultSet);
+                projectList.add(project);
+            }
+            logger.log(Level.DEBUG, "findAllUserOwnProjectsById(long id) method was completed successfully");
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to find user's own projects. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to find user's own projects. Database access error: ", e);
+        }
+        return projectList;
+    }
+
+    @Override
+    public List<Project> findAllUserInvitedProjectsById(long id) throws DaoException {
+        List<Project> projectList = new ArrayList<>();
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Projects.FIND_ALL_USER_INVITED_PROJECTS_BY_ID)) {
+            preparedStatement.setLong(ParameterIndex.FIRST, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                var project = (Project) EntityFactory.PROJECT.build(resultSet);
+                projectList.add(project);
+            }
+            logger.log(Level.DEBUG, "findAllUserInvitedProjectsById(long id) method was completed " +
+                    "successfully");
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to find user's invited projects. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to find user's invited projects. Database access error: ", e);
+        }
+        return projectList;
+    }
 }
