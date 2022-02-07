@@ -134,6 +134,12 @@ public final class SqlQuery {
                 DELETE
                 FROM tags
                 WHERE tag_id = ?""";
+        public static final String FIND_ALL_TAGS_BY_TASK_ID = """
+                SELECT tags.tag_id, user_id, name, color
+                FROM tags
+                         LEFT JOIN tasks_tags ON tags.tag_id = tasks_tags.tag_id
+                         LEFT JOIN tasks ON tasks_tags.task_id = tasks.task_id
+                WHERE tasks.task_id = ?""";
 
         private Tags() {
         }
