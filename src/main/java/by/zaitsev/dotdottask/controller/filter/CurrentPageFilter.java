@@ -20,7 +20,7 @@ import java.io.IOException;
  * @author Konstantin Zaitsev
  */
 @WebFilter(urlPatterns = "*.jsp",
-        dispatcherTypes = {DispatcherType.REQUEST},
+        dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD},
         initParams = {@WebInitParam(name = "PAGES_ROOT_DIRECTORY", value = "/jsp"),
                 @WebInitParam(name = "INDEX_PAGE", value = "/index.jsp")})
 public class CurrentPageFilter implements Filter {
