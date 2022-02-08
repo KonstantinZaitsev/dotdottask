@@ -8,16 +8,16 @@ import java.util.StringJoiner;
  * @author Konstantin Zaitsev
  */
 public class Tag extends AbstractEntity {
-    private long userId;
+    private long taskId;
     private String name;
     private String color;
 
-    public long getUserId() {
-        return userId;
+    public long getTaskId() {
+        return taskId;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setTaskId(long taskId) {
+        this.taskId = taskId;
     }
 
     public String getName() {
@@ -48,7 +48,7 @@ public class Tag extends AbstractEntity {
             return false;
         }
         Tag that = (Tag) o;
-        return userId == that.userId &&
+        return taskId == that.taskId &&
                 name != null ? name.equals(that.name) : that.name == null &&
                 color != null ? color.equals(that.color) : that.color == null;
     }
@@ -56,7 +56,7 @@ public class Tag extends AbstractEntity {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (int) (userId ^ (userId >>> 32));
+        result = 31 * result + (int) (taskId ^ (taskId >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (color != null ? color.hashCode() : 0);
         return result;
@@ -66,7 +66,7 @@ public class Tag extends AbstractEntity {
     public String toString() {
         return new StringJoiner(", ", Tag.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
-                .add("userId=" + userId)
+                .add("userId=" + taskId)
                 .add("name='" + name + "'")
                 .add("color='" + color + "'")
                 .toString();

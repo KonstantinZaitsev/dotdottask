@@ -65,7 +65,7 @@ enum EntityFactory {
             case TAG -> {
                 var tag = new Tag();
                 tag.setId(resultSet.getLong(TableColumn.Tags.TAG_ID));
-                tag.setUserId(resultSet.getLong(TableColumn.Tags.USER_ID));
+                tag.setTaskId(resultSet.getLong(TableColumn.Tags.USER_ID));
                 tag.setName(resultSet.getString(TableColumn.Tags.NAME));
                 tag.setColor(resultSet.getString(TableColumn.Tags.COLOR));
                 yield tag;

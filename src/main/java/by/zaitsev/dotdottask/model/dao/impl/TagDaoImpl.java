@@ -85,7 +85,7 @@ public class TagDaoImpl implements TagDao {
         try (var connection = connectionPool.getConnection();
              var preparedStatement = connection.prepareStatement(SqlQuery.Tags.INSERT_NEW_ENTITY,
                      Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setLong(ParameterIndex.FIRST, entity.getUserId());
+            preparedStatement.setLong(ParameterIndex.FIRST, entity.getTaskId());
             preparedStatement.setString(ParameterIndex.SECOND, entity.getName());
             preparedStatement.setString(ParameterIndex.THIRD, entity.getColor());
             preparedStatement.execute();

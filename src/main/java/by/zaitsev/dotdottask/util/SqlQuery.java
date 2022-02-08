@@ -141,24 +141,23 @@ public final class SqlQuery {
      */
     public static final class Tags {
         public static final String FIND_ENTITY_BY_ID = """
-                SELECT tag_id, user_id, name, color
+                SELECT tag_id, task_id, name, color
                 FROM tags
                 WHERE tag_id = ?""";
         public static final String FIND_ALL_ENTITIES = """
-                SELECT tag_id, user_id, name, color
+                SELECT tag_id, task_id, name, color
                 FROM tags""";
         public static final String INSERT_NEW_ENTITY = """
-                INSERT INTO tags(user_id, name, color)
+                INSERT INTO tags(task_id, name, color)
                 VALUES (?, ?, ?)""";
         public static final String DELETE_ENTITY_BY_ID = """
                 DELETE
                 FROM tags
                 WHERE tag_id = ?""";
         public static final String FIND_ALL_TAGS_BY_TASK_ID = """
-                SELECT tags.tag_id, user_id, name, color
+                SELECT tags.tag_id, tags.task_id, name, color
                 FROM tags
-                         LEFT JOIN tasks_tags ON tags.tag_id = tasks_tags.tag_id
-                         LEFT JOIN tasks ON tasks_tags.task_id = tasks.task_id
+                         LEFT JOIN tasks ON tags.task_id = tasks.task_id
                 WHERE tasks.task_id = ?""";
 
         private Tags() {
