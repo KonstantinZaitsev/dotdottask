@@ -154,8 +154,8 @@ public class UserServiceImpl implements UserService {
         String encryptedPassword = PasswordEncryptor.getInstance().encrypt(password);
         try {
             optionalUser = userDao.findUserByEmailAndPassword(email, encryptedPassword);
-            logger.log(Level.DEBUG, "findUserByEmailAndPassword(String email, String password) method was completed " +
-                    "successfully. User with email {} " +
+            logger.log(Level.DEBUG, "findUserByEmailAndPassword(String email, String password) method was " +
+                    "completed successfully. User with email {} " +
                     (optionalUser.isPresent() ? "was found" : "don't exist"), email);
         } catch (DaoException e) {
             logger.log(Level.ERROR, "Unable to find user by email and password. Dao access error: {}",
@@ -163,5 +163,80 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Unable to find user by email and password. Dao access error: ", e);
         }
         return optionalUser;
+    }
+
+    @Override
+    public boolean updateUserNameById(long id, String name) throws ServiceException {
+        boolean isUpdated;
+        try {
+            isUpdated = userDao.updateUserNameById(id, name);
+            logger.log(Level.DEBUG, "updateUserNameById(long id, String name) method was completed " +
+                    "successfully. User with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to update user's name by id. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to update user's name by id. Dao access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateUserSurnameById(long id, String surname) throws ServiceException {
+        boolean isUpdated;
+        try {
+            isUpdated = userDao.updateUserSurnameById(id, surname);
+            logger.log(Level.DEBUG, "updateUserSurnameById(long id, String surname) method was completed " +
+                    "successfully. User with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to update user's surname by id. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to update user's surname by id. Dao access error:  ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateUserPasswordById(long id, String password, String confirmedPassword) throws ServiceException {
+        boolean isUpdated;
+        try {
+            isUpdated = userDao.updateUserPasswordById(id, PasswordEncryptor.getInstance().encrypt(password));
+            logger.log(Level.DEBUG, "updateUserPasswordById(long id, String encryptedPassword) method was " +
+                    "completed successfully. User with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to update user's password by id. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to update user's password by id. Dao access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateUserImageById(long id, byte[] image) throws ServiceException {
+        boolean isUpdated;
+        try {
+            isUpdated = userDao.updateUserImageById(id, image);
+            logger.log(Level.DEBUG, "updateUserImageById(long id, byte[] image) method was completed " +
+                    "successfully. User with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to update user's image by id. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to update user's image by id. Dao access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateUserEmailById(long id, String email) throws ServiceException {
+        boolean isUpdated;
+        try {
+            isUpdated = userDao.updateUserEmailById(id, email);
+            logger.log(Level.DEBUG, "updateUserEmailById(long id, String email) method was completed " +
+                    "successfully. User with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to update user's email by id. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to update user's email by id. Dao access error: ", e);
+        }
+        return isUpdated;
     }
 }

@@ -29,4 +29,45 @@ public interface UserService extends BaseService<User> {
      * @throws ServiceException if the request to Dao class could not be handled.
      */
     Optional<User> findUserByEmailAndPassword(String email, String password) throws ServiceException;
+
+    /**
+     * @param id   user id to update.
+     * @param name new user's name.
+     * @return true if the user has been updated, otherwise false.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    boolean updateUserNameById(long id, String name) throws ServiceException;
+
+    /**
+     * @param id      user id to update.
+     * @param surname new user's surname.
+     * @return true if the user has been updated, otherwise false.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    boolean updateUserSurnameById(long id, String surname) throws ServiceException;
+
+    /**
+     * @param id                user id to update.
+     * @param password          new user's password.
+     * @param confirmedPassword must be equals password.
+     * @return true if the user has been updated, otherwise false.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    boolean updateUserPasswordById(long id, String password, String confirmedPassword) throws ServiceException;
+
+    /**
+     * @param id    user id to update.
+     * @param image new user's image.
+     * @return true if the user has been updated, otherwise false.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    boolean updateUserImageById(long id, byte[] image) throws ServiceException;
+
+    /**
+     * @param id user id to update.
+     * @param email new user's email.
+     * @return true if the user has been updated, otherwise false.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    boolean updateUserEmailById(long id, String email) throws ServiceException;
 }
