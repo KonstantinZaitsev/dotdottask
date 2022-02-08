@@ -12,6 +12,7 @@ public final class ValidationResult {
     public static final String VALID = "true";
     public static final String INVALID = "invalid";
     public static final String NOT_UNIQUE = "not_unique";
+    public static final String MISMATCH = "mismatch";
 
     private ValidationResult() {
     }
