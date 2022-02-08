@@ -49,11 +49,10 @@ public interface UserService extends BaseService<User> {
     /**
      * @param id                user id to update.
      * @param password          new user's password.
-     * @param confirmedPassword must be equals password.
      * @return true if the user has been updated, otherwise false.
      * @throws ServiceException if the request to Dao class could not be handled.
      */
-    boolean updateUserPasswordById(long id, String password, String confirmedPassword) throws ServiceException;
+    boolean updateUserPasswordById(long id, String password) throws ServiceException;
 
     /**
      * @param id    user id to update.
@@ -70,4 +69,12 @@ public interface UserService extends BaseService<User> {
      * @throws ServiceException if the request to Dao class could not be handled.
      */
     boolean updateUserEmailById(long id, String email) throws ServiceException;
+
+    /**
+     * @param email user email to search.
+     * @return a user wrapped in {@link Optional} if it exists in the database or empty {@link Optional} if it
+     * does not exist in the database.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    Optional<User> findUserByEmail(String email) throws ServiceException;
 }

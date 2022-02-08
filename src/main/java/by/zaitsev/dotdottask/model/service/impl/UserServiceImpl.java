@@ -196,7 +196,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUserPasswordById(long id, String password, String confirmedPassword) throws ServiceException {
+    public boolean updateUserPasswordById(long id, String password) throws ServiceException {
         boolean isUpdated;
         try {
             isUpdated = userDao.updateUserPasswordById(id, PasswordEncryptor.getInstance().encrypt(password));
@@ -238,5 +238,20 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Unable to update user's email by id. Dao access error: ", e);
         }
         return isUpdated;
+    }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) throws ServiceException {
+        Optional<User> optionalUser;
+        try {
+            optionalUser = userDao.findUserByEmail(email);
+            logger.log(Level.DEBUG, "findUserByEmail(String email) method was completed successfully. " +
+                    "User with email {} " + (optionalUser.isPresent() ? "was found" : "don't exist"), email);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to find user by email. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to find user by email. Dao access error: ", e);
+        }
+        return optionalUser;
     }
 }
