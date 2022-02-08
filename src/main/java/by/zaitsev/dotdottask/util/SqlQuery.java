@@ -40,6 +40,26 @@ public final class SqlQuery {
                 FROM users
                 WHERE email = ?
                   AND encrypted_password = ?""";
+        public static final String UPDATE_USER_NAME_BY_ID = """
+                UPDATE users
+                SET name = ?
+                WHERE user_id = ?""";
+        public static final String UPDATE_USER_SURNAME_BY_ID = """
+                UPDATE users
+                SET surname = ?
+                WHERE user_id = ?""";
+        public static final String UPDATE_USER_PASSWORD_BY_ID = """
+                UPDATE users
+                SET encrypted_password = ?
+                WHERE user_id = ?""";
+        public static final String UPDATE_USER_IMAGE_BY_ID = """
+                UPDATE users
+                SET image = ?
+                WHERE user_id = ?""";
+        public static final String UPDATE_USER_EMAIL_BY_ID = """
+                UPDATE users
+                SET email = ?
+                WHERE user_id = ?""";
 
         private Users() {
         }
