@@ -173,4 +173,99 @@ public class UserDaoImpl implements UserDao {
         }
         return optionalUser;
     }
+
+    @Override
+    public boolean updateUserNameById(long id, String name) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Users.UPDATE_USER_NAME_BY_ID)) {
+            preparedStatement.setString(ParameterIndex.FIRST, name);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateUserNameById(long id, String name) method was completed " +
+                    "successfully. User with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update user's name by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update user's name by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateUserSurnameById(long id, String surname) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Users.UPDATE_USER_SURNAME_BY_ID)) {
+            preparedStatement.setString(ParameterIndex.FIRST, surname);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateUserSurnameById(long id, String surname) method was completed " +
+                    "successfully. User with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update user's surname by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update user's surname by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateUserPasswordById(long id, String encryptedPassword) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Users.UPDATE_USER_PASSWORD_BY_ID)) {
+            preparedStatement.setString(ParameterIndex.FIRST, encryptedPassword);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateUserPasswordById(long id, String encryptedPassword) method was " +
+                    "completed successfully. User with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update user's password by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update user's password by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateUserImageById(long id, byte[] image) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Users.UPDATE_USER_IMAGE_BY_ID)) {
+            preparedStatement.setBytes(ParameterIndex.FIRST, image);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateUserImageById(long id, byte[] image) method was completed " +
+                    "successfully. User with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update user's image by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update user's image by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateUserEmailById(long id, String email) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Users.UPDATE_USER_EMAIL_BY_ID)) {
+            preparedStatement.setString(ParameterIndex.FIRST, email);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateUserEmailById(long id, String email) method was completed " +
+                    "successfully. User with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update user's email by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update user's email by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
 }

@@ -35,4 +35,44 @@ public interface UserDao extends BaseDao<User> {
      * @throws DaoException if the request to database could not be handled.
      */
     Optional<User> findUserByEmailAndPassword(String email, String encryptedPassword) throws DaoException;
+
+    /**
+     * @param id   user id to update.
+     * @param name new user's name.
+     * @return true if the user has been updated, otherwise false.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    boolean updateUserNameById(long id, String name) throws DaoException;
+
+    /**
+     * @param id      user id to update.
+     * @param surname new user's surname.
+     * @return true if the user has been updated, otherwise false.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    boolean updateUserSurnameById(long id, String surname) throws DaoException;
+
+    /**
+     * @param id                user id to update.
+     * @param encryptedPassword new user's password.
+     * @return true if the user has been updated, otherwise false.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    boolean updateUserPasswordById(long id, String encryptedPassword) throws DaoException;
+
+    /**
+     * @param id    user id to update.
+     * @param image new user's image.
+     * @return true if the user has been updated, otherwise false.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    boolean updateUserImageById(long id, byte[] image) throws DaoException;
+
+    /**
+     * @param id user id to update.
+     * @param email ew user's email.
+     * @return true if the user has been updated, otherwise false.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    boolean updateUserEmailById(long id, String email) throws DaoException;
 }
