@@ -34,9 +34,6 @@
                         <li><a class="nav-link scrollto" href="#hero">${home}</a></li>
                         <li><a class="nav-link scrollto" href="#about">${about}</a></li>
                     </c:when>
-                    <c:when test="${user.userRole eq 'USER'}">
-
-                    </c:when>
                 </c:choose>
                 <li class="dropdown"><a href="#"><span>${language}</span><i class="bi-chevron-down"></i></a>
                     <ul>
