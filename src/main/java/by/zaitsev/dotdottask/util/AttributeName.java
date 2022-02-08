@@ -22,6 +22,11 @@ public final class AttributeName {
     public static final String SIGN_IN_RESULT = "sign_in_result";
     public static final String OWN_PROJECTS = "own_projects";
     public static final String INVITED_PROJECTS = "invited_projects";
+    public static final String UPDATE_NAME_RESULT = "update_name_result";
+    public static final String UPDATE_SURNAME_RESULT = "update_surname_result";
+    public static final String UPDATE_PASSWORD_RESULT = "update_password_result";
+    public static final String UPDATE_IMAGE_RESULT = "update_image_result";
+    public static final String UPDATE_EMAIL_RESULT = "update_email_result";
 
     private AttributeName() {
     }
