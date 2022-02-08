@@ -4,6 +4,7 @@ import by.zaitsev.dotdottask.controller.command.CommandFactory;
 import by.zaitsev.dotdottask.exception.CommandException;
 import by.zaitsev.dotdottask.util.ParameterName;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import java.io.IOException;
  * @author Konstantin Zaitsev
  */
 @WebServlet(name = "controller", urlPatterns = "/controller")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024)
 public class Controller extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(Controller.class);
 
