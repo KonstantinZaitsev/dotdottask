@@ -10,6 +10,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * SignOutCommand is used to sign out from the account.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class SignOutCommand implements Command {
     private static final Logger logger = LogManager.getLogger(SignOutCommand.class);
 

@@ -17,6 +17,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * EditNameCommand is used to edit user name.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditNameCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditNameCommand.class);
 

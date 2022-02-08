@@ -46,7 +46,7 @@ class ConnectionFactory {
     }
 
     /**
-     * @return a single instance of the ConnectionFactory class
+     * @return a single instance of the ConnectionFactory class.
      */
     static ConnectionFactory getInstance() {
         if (instance == null) {

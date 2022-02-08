@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 public interface BaseService<T extends AbstractEntity> {
     /**
-     * @param id entity id to search
+     * @param id entity id to search.
      * @return an entity wrapped in {@link Optional} if it exists in the database or empty {@link Optional} if it
      * does not exist in the database.
      * @throws ServiceException if the request to Dao class could not be handled.

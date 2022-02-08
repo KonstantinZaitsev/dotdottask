@@ -17,6 +17,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * EditPasswordCommand is used to edit user password.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditPasswordCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditPasswordCommand.class);
 

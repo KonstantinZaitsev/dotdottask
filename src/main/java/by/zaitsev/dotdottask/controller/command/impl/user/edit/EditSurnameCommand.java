@@ -17,6 +17,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * EditSurnameCommand is used to edit user surname.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditSurnameCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditSurnameCommand.class);
 

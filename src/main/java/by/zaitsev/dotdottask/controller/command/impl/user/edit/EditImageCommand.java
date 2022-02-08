@@ -19,6 +19,11 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
+/**
+ * EditImageCommand is used to edit user image.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditImageCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditImageCommand.class);
 

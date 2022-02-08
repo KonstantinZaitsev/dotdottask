@@ -17,6 +17,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * EditEmailCommand is used to edit user email.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditEmailCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditEmailCommand.class);
 
