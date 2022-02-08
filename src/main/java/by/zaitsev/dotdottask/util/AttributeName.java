@@ -25,8 +25,8 @@ public final class AttributeName {
     public static final String UPDATE_NAME_RESULT = "update_name_result";
     public static final String UPDATE_SURNAME_RESULT = "update_surname_result";
     public static final String UPDATE_PASSWORD_RESULT = "update_password_result";
-    public static final String UPDATE_IMAGE_RESULT = "update_image_result";
     public static final String UPDATE_EMAIL_RESULT = "update_email_result";
+    public static final String IMAGE = "image";
 
     private AttributeName() {
     }
