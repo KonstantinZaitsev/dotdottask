@@ -36,7 +36,7 @@
 </head>
 <body>
 <main id="main">
-    <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
+    <div class="flex-shrink-0 p-3 sidebar">
         <a href="#" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
             <svg class="bi me-2" width="30" height="24"></svg>
             <span class="fs-5 fw-semibold">../task</span>
@@ -55,9 +55,12 @@
                                     ${project.title}
                             </button>
                             <div class="collapse" id="project-${project.id}">
-                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small nav-tabs flex-column nav"
+                                    role="tablist">
                                     <c:forEach items="${project.taskList}" var="task">
-                                        <li><a href="#" class="link-dark rounded">${task.title}</a></li>
+                                        <li class="nav-item"><a href="#task-info-${task.id}"
+                                                                class="link-dark rounded nav-link" role="tab"
+                                                                data-bs-toggle="tab">${task.title}</a></li>
                                     </c:forEach>
                                 </ul>
                             </div>
@@ -281,6 +284,54 @@
             </div>
         </div>
     </div>
+
+    <div class="tab-content">
+        <c:forEach items="${sessionScope.own_projects}" var="project">
+            <c:forEach items="${project.taskList}" var="task">
+                <div id="task-info-${task.id}" class="tab-pane fade" role="tabpanel">
+                    <div class="text-center">
+                        <h1><strong>${task.title}</strong></h1>
+                        <div class="border-top my-3"></div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h4><strong>Creation date:</strong></h4>
+                                <p>${task.creationDate}</p>
+                            </div>
+                            <div class="col-6">
+                                <h4><strong>Deadline:</strong></h4>
+                                <p>${task.deadline}</p>
+                            </div>
+                            <div class="col-6">
+                                <c:choose>
+                                    <c:when test="${task.assignedUserId eq user.id}">
+                                        <h4><strong>Assigned</strong></h4>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h4><strong>Not Assigned</strong></h4>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                            <div class="col-6">
+                                <c:choose>
+                                    <c:when test="${task.isDone()}">
+                                        <h4><strong>Done</strong></h4>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h4><strong>Not Done</strong></h4>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-top my-3"></div>
+                    <div>
+                        <p>${task.description}</p>
+                    </div>
+                </div>
+            </c:forEach>
+        </c:forEach>
+    </div>
+
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="${abs}/js/catalog.js"></script>
