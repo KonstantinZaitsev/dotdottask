@@ -1,19 +1,23 @@
 body {
-    min-height: 100vh;
     font-family: "Open Sans", sans-serif;
-}
-
-html {
-    height: available;
+    background: url("../image/catalog-bg.png");
+    background-size: cover;
 }
 
 main {
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100vh;
     max-height: 100vh;
     overflow-x: auto;
     overflow-y: hidden;
+}
+
+.sidebar {
+    height: 100%;
+    background: rgba(50, 153, 204, 0.6);
+    width: 280px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 40px;
 }
 
 .b-example-divider {
@@ -157,4 +161,11 @@ main {
     display: block;
     padding: 15px 0;
     color: #424242
+}
+
+.tab-content {
+    position: absolute;
+    top: 100px;
+    left: 800px;
+    background: rgba(255, 255, 255, 0.6);
 }
