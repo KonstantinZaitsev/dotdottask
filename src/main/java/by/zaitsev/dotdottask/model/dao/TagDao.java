@@ -17,4 +17,12 @@ public interface TagDao extends BaseDao<Tag> {
      * @throws DaoException if the request to database could not be handled.
      */
     List<Tag> findAllTagsByTaskId(long id) throws DaoException;
+
+    /**
+     * @param id tag id to update.
+     * @param name new project name.
+     * @return true if the project has been updated, otherwise false.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    boolean updateTagNameById(long id, String name) throws DaoException;
 }

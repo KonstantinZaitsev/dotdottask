@@ -138,4 +138,22 @@ public class TagDaoImpl implements TagDao {
         }
         return tagList;
     }
+
+    @Override
+    public boolean updateTagNameById(long id, String name) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(SqlQuery.Tags.UPDATE_TAG_NAME_BY_ID)) {
+            preparedStatement.setString(ParameterIndex.FIRST, name);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateTagNameById(long id, String name) method was completed " +
+                    "successfully. Tag with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update tag name by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update tag name by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
 }
