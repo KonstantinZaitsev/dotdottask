@@ -204,9 +204,10 @@
                                                 <form action="${abs}/controller" method="post">
                                                     <input type="hidden" name="command" value="edit_surname_command">
                                                     <label for="surname"></label>
-                                                    <input type="text" name="name" id="surname" placeholder="${surname}"
-                                                           minlength="2" maxlength="30" pattern="[a-zA-Zа-яА-Я]+"
-                                                           title="enter on alphabets only" required>
+                                                    <input type="text" name="surname" id="surname"
+                                                           placeholder="${surname}" minlength="2" maxlength="30"
+                                                           pattern="[a-zA-Zа-яА-Я]+" title="enter on alphabets only"
+                                                           required>
                                                     <button type="submit" class="btn btn-primary btn-round">${edit}
                                                     </button>
                                                 </form>
@@ -290,6 +291,9 @@
             <c:forEach items="${project.taskList}" var="task">
                 <div id="task-info-${task.id}" class="tab-pane fade" role="tabpanel">
                     <div class="text-center">
+                        <h1 style="font-style: italic"><strong>${project.title}</strong></h1>
+                        <p>${project.description}</p>
+                        <div class="border-top my-3"></div>
                         <h1><strong>${task.title}</strong></h1>
                         <div class="border-top my-3"></div>
                         <div class="row">
@@ -323,6 +327,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="border-top my-3"></div>
+                    <c:forEach items="${task.tagList}" var="tag">
+                        <div class="alert alert-info text-center" style="width: 40%" role="alert">
+                                ${tag.name}
+                        </div>
+                    </c:forEach>
                     <div class="border-top my-3"></div>
                     <div>
                         <p>${task.description}</p>
