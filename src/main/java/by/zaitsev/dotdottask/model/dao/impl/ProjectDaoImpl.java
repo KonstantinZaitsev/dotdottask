@@ -163,4 +163,42 @@ public class ProjectDaoImpl implements ProjectDao {
         }
         return projectList;
     }
+
+    @Override
+    public boolean updateProjectTitleById(long id, String title) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Projects.UPDATE_PROJECT_TITLE_BY_ID)) {
+            preparedStatement.setString(ParameterIndex.FIRST, title);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateProjectTitleById(long id, String title) method was completed " +
+                    "successfully. Project with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update project title by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update project title by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateProjectDescriptionById(long id, String description) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Projects.UPDATE_PROJECT_DESCRIPTION_BY_ID)) {
+            preparedStatement.setString(ParameterIndex.FIRST, description);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateProjectDescriptionById(long id, String description) method was " +
+                    "completed successfully. Project with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update project description by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update project description by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
 }

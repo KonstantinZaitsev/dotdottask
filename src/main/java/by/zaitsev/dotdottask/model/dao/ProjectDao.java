@@ -24,4 +24,20 @@ public interface ProjectDao extends BaseDao<Project> {
      * @throws DaoException if the request to database could not be handled.
      */
     List<Project> findAllUserInvitedProjectsById(long id) throws DaoException;
+
+    /**
+     * @param id    project id to update.
+     * @param title new project title.
+     * @return true if the project has been updated, otherwise false.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    boolean updateProjectTitleById(long id, String title) throws DaoException;
+
+    /**
+     * @param id          project id to update.
+     * @param description new project description.
+     * @return true if the project has been updated, otherwise false.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    boolean updateProjectDescriptionById(long id, String description) throws DaoException;
 }
