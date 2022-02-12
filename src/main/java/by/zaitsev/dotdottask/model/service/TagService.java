@@ -19,4 +19,12 @@ public interface TagService extends BaseService<Tag> {
      * @throws ServiceException if the request to Dao class could not be handled.
      */
     List<Tag> findAllTagsByTaskId(long id) throws ServiceException;
+
+    /**
+     * @param id   tag id to update.
+     * @param name new tag name.
+     * @return true if the user has been updated, otherwise false.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    boolean updateTagNameById(long id, String name) throws ServiceException;
 }

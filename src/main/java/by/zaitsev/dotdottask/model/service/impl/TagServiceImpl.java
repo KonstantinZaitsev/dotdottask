@@ -105,4 +105,19 @@ public class TagServiceImpl implements TagService {
         }
         return tagList;
     }
+
+    @Override
+    public boolean updateTagNameById(long id, String name) throws ServiceException {
+        boolean isUpdated;
+        try {
+            isUpdated = tagDao.updateTagNameById(id, name);
+            logger.log(Level.DEBUG, "updateTagNameById(long id, String name) method was completed " +
+                    "successfully. Tag with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to update tag name by id. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to update tag name by id. Dao access error: ", e);
+        }
+        return isUpdated;
+    }
 }
