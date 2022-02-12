@@ -328,11 +328,13 @@
                         </div>
                     </div>
                     <div class="border-top my-3"></div>
-                    <c:forEach items="${task.tagList}" var="tag">
-                        <div class="alert alert-info text-center" style="width: 40%" role="alert">
-                                ${tag.name}
-                        </div>
-                    </c:forEach>
+                    <div class="row align-items-start">
+                        <c:forEach items="${task.tagList}" var="tag">
+                            <div class="alert alert-info text-center" style="width: 40%; margin: 20px" role="alert">
+                                    ${tag.name}
+                            </div>
+                        </c:forEach>
+                    </div>
                     <div class="border-top my-3"></div>
                     <div>
                         <p>${task.description}</p>
