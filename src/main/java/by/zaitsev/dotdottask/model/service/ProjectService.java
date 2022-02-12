@@ -26,4 +26,20 @@ public interface ProjectService extends BaseService<Project> {
      * @throws ServiceException if the request to Dao class could not be handled.
      */
     List<Project> findAllUserInvitedProjectsById(long id) throws ServiceException;
+
+    /**
+     * @param id    project id to update.
+     * @param title new project title.
+     * @return true if the user has been updated, otherwise false.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    boolean updateProjectTitleById(long id, String title) throws ServiceException;
+
+    /**
+     * @param id          project id to update.
+     * @param description new project description.
+     * @return true if the user has been updated, otherwise false.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    boolean updateProjectDescriptionById(long id, String description) throws ServiceException;
 }

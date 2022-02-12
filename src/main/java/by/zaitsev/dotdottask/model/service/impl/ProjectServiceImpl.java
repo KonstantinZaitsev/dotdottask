@@ -141,4 +141,34 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return projectList;
     }
+
+    @Override
+    public boolean updateProjectTitleById(long id, String title) throws ServiceException {
+        boolean isUpdated;
+        try {
+            isUpdated = projectDao.updateProjectTitleById(id, title);
+            logger.log(Level.DEBUG, "updateProjectTitleById(long id, String title) method was completed " +
+                    "successfully. Project with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to update project title by id. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to update project title by id. Dao access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateProjectDescriptionById(long id, String description) throws ServiceException {
+        boolean isUpdated;
+        try {
+            isUpdated = projectDao.updateProjectDescriptionById(id, description);
+            logger.log(Level.DEBUG, "updateProjectDescriptionById(long id, String description) method was " +
+                    "completed successfully. Project with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to update project description by id. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to update project description by id. Dao access error: ", e);
+        }
+        return isUpdated;
+    }
 }
