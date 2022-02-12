@@ -97,6 +97,14 @@ public final class SqlQuery {
                          LEFT JOIN projects_users on projects.project_id = projects_users.project_id
                          LEFT JOIN users on projects_users.user_id = users.user_id
                 WHERE users.user_id = ?""";
+        public static final String UPDATE_PROJECT_TITLE_BY_ID = """
+                UPDATE projects
+                SET title = ?
+                WHERE project_id = ?""";
+        public static final String UPDATE_PROJECT_DESCRIPTION_BY_ID = """
+                UPDATE projects
+                SET description = ?
+                WHERE project_id = ?""";
 
         private Projects() {
         }
