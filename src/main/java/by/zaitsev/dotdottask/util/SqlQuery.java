@@ -73,26 +73,26 @@ public final class SqlQuery {
      */
     public static final class Projects {
         public static final String FIND_ENTITY_BY_ID = """
-                SELECT project_id, owner_id, title, color, description
+                SELECT project_id, owner_id, title, description
                 FROM projects
                 WHERE project_id = ?""";
         public static final String FIND_ALL_ENTITIES = """
-                SELECT project_id, owner_id, title, color, description
+                SELECT project_id, owner_id, title, description
                 FROM projects""";
         public static final String INSERT_NEW_ENTITY = """
-                INSERT INTO projects(owner_id, title, color, description)
+                INSERT INTO projects(owner_id, title, description)
                 VALUES (?, ?, ?, ?)""";
         public static final String DELETE_ENTITY_BY_ID = """
                 DELETE
                 FROM projects
                 WHERE project_id = ?""";
         public static final String FIND_ALL_USER_OWN_PROJECTS_BY_ID = """
-                SELECT project_id, owner_id, title, color, description
+                SELECT project_id, owner_id, title, description
                 FROM projects
                          LEFT JOIN users on owner_id = users.user_id
                 WHERE user_id = ?""";
         public static final String FIND_ALL_USER_INVITED_PROJECTS_BY_ID = """
-                SELECT projects.project_id, owner_id, title, color, description
+                SELECT projects.project_id, owner_id, title, description
                 FROM projects
                          LEFT JOIN projects_users on projects.project_id = projects_users.project_id
                          LEFT JOIN users on projects_users.user_id = users.user_id
@@ -141,21 +141,21 @@ public final class SqlQuery {
      */
     public static final class Tags {
         public static final String FIND_ENTITY_BY_ID = """
-                SELECT tag_id, task_id, name, color
+                SELECT tag_id, task_id, name
                 FROM tags
                 WHERE tag_id = ?""";
         public static final String FIND_ALL_ENTITIES = """
-                SELECT tag_id, task_id, name, color
+                SELECT tag_id, task_id, name
                 FROM tags""";
         public static final String INSERT_NEW_ENTITY = """
-                INSERT INTO tags(task_id, name, color)
+                INSERT INTO tags(task_id, name)
                 VALUES (?, ?, ?)""";
         public static final String DELETE_ENTITY_BY_ID = """
                 DELETE
                 FROM tags
                 WHERE tag_id = ?""";
         public static final String FIND_ALL_TAGS_BY_TASK_ID = """
-                SELECT tags.tag_id, tags.task_id, name, color
+                SELECT tags.tag_id, tags.task_id, name
                 FROM tags
                          LEFT JOIN tasks ON tags.task_id = tasks.task_id
                 WHERE tasks.task_id = ?""";

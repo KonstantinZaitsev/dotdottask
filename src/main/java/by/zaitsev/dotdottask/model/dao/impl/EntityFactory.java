@@ -46,7 +46,6 @@ enum EntityFactory {
                 project.setId(resultSet.getLong(TableColumn.Projects.PROJECT_ID));
                 project.setOwnerId(resultSet.getLong(TableColumn.Projects.OWNER_ID));
                 project.setTitle(resultSet.getString(TableColumn.Projects.TITLE));
-                project.setColor(resultSet.getString(TableColumn.Projects.COLOR));
                 project.setDescription(resultSet.getString(TableColumn.Projects.DESCRIPTION));
                 yield project;
             }
@@ -66,7 +65,6 @@ enum EntityFactory {
                 var tag = new Tag();
                 tag.setId(resultSet.getLong(TableColumn.Tags.TAG_ID));
                 tag.setName(resultSet.getString(TableColumn.Tags.NAME));
-                tag.setColor(resultSet.getString(TableColumn.Tags.COLOR));
                 yield tag;
             }
         };

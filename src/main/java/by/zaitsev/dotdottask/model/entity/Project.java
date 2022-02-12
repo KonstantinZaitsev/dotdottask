@@ -11,7 +11,6 @@ import java.util.StringJoiner;
 public class Project extends AbstractEntity {
     private long ownerId;
     private String title;
-    private String color;
     private String description;
     private List<Task> taskList;
 
@@ -29,14 +28,6 @@ public class Project extends AbstractEntity {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public String getDescription() {
@@ -69,7 +60,6 @@ public class Project extends AbstractEntity {
         Project that = (Project) o;
         return ownerId == that.ownerId &&
                 title != null ? title.equals(that.title) : that.title == null &&
-                color != null ? color.equals(that.color) : that.color == null &&
                 description != null ? description.equals(that.description) : that.description == null &&
                 taskList != null ? taskList.equals(that.taskList) : that.taskList == null;
     }
@@ -79,7 +69,6 @@ public class Project extends AbstractEntity {
         int result = super.hashCode();
         result = 31 * result + (int) (ownerId ^ (ownerId >>> 32));
         result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (color != null ? color.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (taskList != null ? taskList.hashCode() : 0);
         return result;
@@ -91,7 +80,6 @@ public class Project extends AbstractEntity {
                 .add("id=" + id)
                 .add("ownerId=" + ownerId)
                 .add("title='" + title + "'")
-                .add("color='" + color + "'")
                 .add("description='" + description + "'")
                 .add("taskList=" + taskList)
                 .toString();

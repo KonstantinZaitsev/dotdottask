@@ -87,8 +87,7 @@ public class ProjectDaoImpl implements ProjectDao {
                      Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setLong(ParameterIndex.FIRST, entity.getOwnerId());
             preparedStatement.setString(ParameterIndex.SECOND, entity.getTitle());
-            preparedStatement.setString(ParameterIndex.THIRD, entity.getColor());
-            preparedStatement.setString(ParameterIndex.FOURTH, entity.getDescription());
+            preparedStatement.setString(ParameterIndex.THIRD, entity.getDescription());
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {

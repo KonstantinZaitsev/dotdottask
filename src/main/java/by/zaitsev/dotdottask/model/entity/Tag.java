@@ -10,7 +10,6 @@ import java.util.StringJoiner;
 public class Tag extends AbstractEntity {
     private long taskId;
     private String name;
-    private String color;
 
     public long getTaskId() {
         return taskId;
@@ -28,14 +27,6 @@ public class Tag extends AbstractEntity {
         this.name = name;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -49,8 +40,7 @@ public class Tag extends AbstractEntity {
         }
         Tag that = (Tag) o;
         return taskId == that.taskId &&
-                name != null ? name.equals(that.name) : that.name == null &&
-                color != null ? color.equals(that.color) : that.color == null;
+                name != null ? name.equals(that.name) : that.name == null;
     }
 
     @Override
@@ -58,7 +48,6 @@ public class Tag extends AbstractEntity {
         int result = super.hashCode();
         result = 31 * result + (int) (taskId ^ (taskId >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (color != null ? color.hashCode() : 0);
         return result;
     }
 
@@ -68,7 +57,6 @@ public class Tag extends AbstractEntity {
                 .add("id=" + id)
                 .add("userId=" + taskId)
                 .add("name='" + name + "'")
-                .add("color='" + color + "'")
                 .toString();
     }
 }

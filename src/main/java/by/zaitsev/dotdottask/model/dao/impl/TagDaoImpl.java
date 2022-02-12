@@ -87,7 +87,6 @@ public class TagDaoImpl implements TagDao {
                      Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setLong(ParameterIndex.FIRST, entity.getTaskId());
             preparedStatement.setString(ParameterIndex.SECOND, entity.getName());
-            preparedStatement.setString(ParameterIndex.THIRD, entity.getColor());
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
