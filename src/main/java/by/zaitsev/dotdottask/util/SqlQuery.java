@@ -187,6 +187,10 @@ public final class SqlQuery {
                 FROM tags
                          LEFT JOIN tasks ON tags.task_id = tasks.task_id
                 WHERE tasks.task_id = ?""";
+        public static final String UPDATE_TAG_NAME_BY_ID = """
+                UPDATE tags
+                SET name = ?
+                WHERE tag_id = ?""";
 
         private Tags() {
         }
