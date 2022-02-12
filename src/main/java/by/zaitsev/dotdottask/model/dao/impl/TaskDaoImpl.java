@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -141,5 +142,100 @@ public class TaskDaoImpl implements TaskDao {
             throw new DaoException("Unable to find tasks by project id. Database access error: ", e);
         }
         return taskList;
+    }
+
+    @Override
+    public boolean updateTaskTitleById(long id, String title) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Tasks.UPDATE_TASK_TITLE_BY_ID)) {
+            preparedStatement.setString(ParameterIndex.FIRST, title);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateTaskTitleById(long id, String title) method was completed " +
+                    "successfully. Task with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update task title by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update task title by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateTaskDescriptionById(long id, String description) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Tasks.UPDATE_TASk_DESCRIPTION_BY_ID)) {
+            preparedStatement.setString(ParameterIndex.FIRST, description);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateTaskDescriptionById(long id, String description) method was " +
+                    "completed successfully. Task with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update task description by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update task description by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateTaskDeadlineById(long id, Timestamp deadline) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Tasks.UPDATE_TASK_DEADLINE_BY_ID)) {
+            preparedStatement.setTimestamp(ParameterIndex.FIRST, deadline);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateTaskDeadlineById(long id, Timestamp deadline) method was " +
+                    "completed successfully. Task with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update task deadline by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update task deadline by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateTaskIsDoneById(long id, boolean isDone) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Tasks.UPDATE_TASK_IS_DONE_BY_ID)) {
+            preparedStatement.setBoolean(ParameterIndex.FIRST, isDone);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateTaskIsDoneById(long id, boolean isDone) method was completed " +
+                    "successfully. Task with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update task is done status by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update task is done status by id. Database access error: ", e);
+        }
+        return isUpdated;
+    }
+
+    @Override
+    public boolean updateTaskAssignedUserIdById(long id, long assignedUserId) throws DaoException {
+        boolean isUpdated;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Tasks.UPDATE_TASK_ASSIGNED_USER_ID_BY_ID)) {
+            preparedStatement.setLong(ParameterIndex.FIRST, assignedUserId);
+            preparedStatement.setLong(ParameterIndex.SECOND, id);
+            isUpdated = preparedStatement.execute();
+            logger.log(Level.DEBUG, "updateTaskAssignedUserIdById(long id, long assignedUserId) method was " +
+                    "completed successfully. Task with id {} " + (isUpdated ? "was updated" : "wasn't updated"), id);
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to update task assigned user id by id. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to update task assigned user id by id. Database access error: ", e);
+        }
+        return isUpdated;
     }
 }
