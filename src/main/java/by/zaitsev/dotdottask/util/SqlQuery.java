@@ -136,6 +136,26 @@ public final class SqlQuery {
                 FROM tasks
                          LEFT JOIN projects ON tasks.project_id = projects.project_id
                 WHERE projects.project_id = ?""";
+        public static final String UPDATE_TASK_TITLE_BY_ID = """
+                UPDATE tasks
+                SET title = ?
+                WHERE task_id = ?""";
+        public static final String UPDATE_TASk_DESCRIPTION_BY_ID = """
+                UPDATE tasks
+                SET description = ?
+                WHERE task_id = ?""";
+        public static final String UPDATE_TASK_DEADLINE_BY_ID = """
+                UPDATE tasks
+                SET deadline = ?
+                WHERE task_id = ?""";
+        public static final String UPDATE_TASK_IS_DONE_BY_ID = """
+                UPDATE tasks
+                SET is_done = ?
+                WHERE task_id = ?""";
+        public static final String UPDATE_TASK_ASSIGNED_USER_ID_BY_ID = """
+                UPDATE tasks
+                SET assigned_user_id = ?
+                WHERE task_id = ?""";
 
         private Tasks() {
         }
