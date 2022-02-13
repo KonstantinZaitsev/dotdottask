@@ -45,8 +45,8 @@ public class EditTagNameCommand implements Command {
                     .filter(value -> value.getId() == taskId)
                     .findFirst();
         } else {
-            logger.log(Level.ERROR, "Cannot update project title, there are no project with id {}", projectId);
-            throw new CommandException("Cannot update project title, there are no project with id " + projectId);
+            logger.log(Level.ERROR, "Cannot update tag name, there are no project with id {}", projectId);
+            throw new CommandException("Cannot update tag name, there are no project with id " + projectId);
         }
         Optional<Tag> optionalTag;
         if (optionalTask.isPresent()) {
@@ -55,15 +55,15 @@ public class EditTagNameCommand implements Command {
                     .filter(value -> value.getId() == tagId)
                     .findFirst();
         } else {
-            logger.log(Level.ERROR, "Cannot update project title, there are no task with id {}", taskId);
-            throw new CommandException("Cannot update project title, there are no task with id " + taskId);
+            logger.log(Level.ERROR, "Cannot update tag name, there are no task with id {}", taskId);
+            throw new CommandException("Cannot update tag name, there are no task with id " + taskId);
         }
         Tag tag;
         if (optionalTag.isPresent()) {
             tag = optionalTag.get();
         } else {
-            logger.log(Level.ERROR, "Cannot update project title, there are no tag with id {}", tagId);
-            throw new CommandException("Cannot update project title, there are no tag with id " + tagId);
+            logger.log(Level.ERROR, "Cannot update tag name, there are no tag with id {}", tagId);
+            throw new CommandException("Cannot update tag name, there are no tag with id " + tagId);
         }
         var tagValidator = TagValidator.getInstance();
         try {
