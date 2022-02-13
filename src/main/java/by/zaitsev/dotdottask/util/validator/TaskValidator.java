@@ -1,7 +1,5 @@
 package by.zaitsev.dotdottask.util.validator;
 
-import java.sql.Timestamp;
-
 /**
  * TaskValidator is the class used to validate the task entity classes.
  *
@@ -10,6 +8,7 @@ import java.sql.Timestamp;
 public class TaskValidator {
     private static final int MAX_TITLE_LENGTH = 100;
     private static final int MAX_DESCRIPTION_LENGTH = 500;
+    private static final String IS_DONE_REGEX = "true|false";
     private static TaskValidator instance;
 
     private TaskValidator() {
@@ -47,5 +46,13 @@ public class TaskValidator {
      */
     public boolean isDeadlineValid(String timestamp) {
         return timestamp != null;
+    }
+
+    /**
+     * @param isDone is done status to validate.
+     * @return true if the is done status is valid, false if not.
+     */
+    public boolean isIsDoneValid(String isDone) {
+        return isDone != null && isDone.matches(IS_DONE_REGEX);
     }
 }
