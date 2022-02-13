@@ -268,4 +268,26 @@ public class UserDaoImpl implements UserDao {
         }
         return isUpdated;
     }
+
+    @Override
+    public List<User> findAllAssignedUsersByProjectId(long id) throws DaoException {
+        List<User> userList = new ArrayList<>();
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Users.FIND_ALL_ASSIGNED_USERS_BY_PROJECT_ID)) {
+            preparedStatement.setLong(ParameterIndex.FIRST, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                var user = (User) EntityFactory.USER.build(resultSet);
+                userList.add(user);
+            }
+            logger.log(Level.DEBUG, "findAllAssignedUsersByProjectId(long id) method was completed " +
+                    "successfully");
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to find all assigned users. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to find all assigned users. Database access error: ", e);
+        }
+        return userList;
+    }
 }

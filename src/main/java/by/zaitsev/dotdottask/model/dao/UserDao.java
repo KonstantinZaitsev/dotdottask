@@ -3,6 +3,7 @@ package by.zaitsev.dotdottask.model.dao;
 import by.zaitsev.dotdottask.exception.DaoException;
 import by.zaitsev.dotdottask.model.entity.User;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -69,10 +70,17 @@ public interface UserDao extends BaseDao<User> {
     boolean updateUserImageById(long id, byte[] image) throws DaoException;
 
     /**
-     * @param id user id to update.
+     * @param id    user id to update.
      * @param email ew user's email.
      * @return true if the user has been updated, otherwise false.
      * @throws DaoException if the request to database could not be handled.
      */
     boolean updateUserEmailById(long id, String email) throws DaoException;
+
+    /**
+     * @param id project id to find users.
+     * @return list of found users.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    List<User> findAllAssignedUsersByProjectId(long id) throws DaoException;
 }
