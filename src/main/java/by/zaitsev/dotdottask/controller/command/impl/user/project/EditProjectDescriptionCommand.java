@@ -50,7 +50,7 @@ public class EditProjectDescriptionCommand implements Command {
                 logger.log(Level.DEBUG, "execute(HttpServletRequest request) method was completed " +
                         "successfully. Forwarded to catalog page");
             } else {
-                request.setAttribute(AttributeName.UPDATE_DESCRIPTION_RESULT, ValidationResult.INVALID);
+                request.setAttribute(AttributeName.UPDATE_PROJECT_DESCRIPTION_RESULT, ValidationResult.INVALID);
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Project cannot be updated: {}", e.getMessage());

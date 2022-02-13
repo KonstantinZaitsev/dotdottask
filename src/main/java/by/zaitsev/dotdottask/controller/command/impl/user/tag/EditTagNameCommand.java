@@ -73,7 +73,7 @@ public class EditTagNameCommand implements Command {
                 logger.log(Level.DEBUG, "execute(HttpServletRequest request) method was completed " +
                         "successfully. Forwarded to catalog page");
             } else {
-                request.setAttribute(AttributeName.UPDATE_TAG_RESULT, ValidationResult.INVALID);
+                request.setAttribute(AttributeName.UPDATE_TAG_NAME_RESULT, ValidationResult.INVALID);
             }
         } catch (ServiceException e) {
             logger.log(Level.ERROR, "Tag cannot be updated: {}", e.getMessage());
