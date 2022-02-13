@@ -50,8 +50,8 @@ public class EditTaskTitleCommand implements Command {
         if (optionalTask.isPresent()) {
             task = optionalTask.get();
         } else {
-            logger.log(Level.ERROR, "Cannot update task title, there are no tag with id {}", taskId);
-            throw new CommandException("Cannot update task title, there are no tag with id " + taskId);
+            logger.log(Level.ERROR, "Cannot update task title, there are no task with id {}", taskId);
+            throw new CommandException("Cannot update task title, there are no task with id " + taskId);
         }
         var taskValidator = TaskValidator.getInstance();
         try {
