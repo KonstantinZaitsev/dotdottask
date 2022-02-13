@@ -37,7 +37,7 @@ public enum CommandType {
     CHANGE_LOCALE_COMMAND(new ChangeLocaleCommand(), EnumSet.of(User.UserRole.USER, User.UserRole.GUEST)),
     SIGN_UP_COMMAND(new SignUpCommand(), EnumSet.of(User.UserRole.GUEST)),
     SIGN_IN_COMMAND(new SignInCommand(), EnumSet.of(User.UserRole.GUEST)),
-    GO_TO_CATALOG_PAGE_COMMAND(new GoToCatalogPageCommand(), EnumSet.of(User.UserRole.GUEST)),
+    GO_TO_CATALOG_PAGE_COMMAND(new GoToCatalogPageCommand(), EnumSet.of(User.UserRole.USER)),
     GO_TO_SIGN_IN_PAGE_COMMAND(new GoToSignInPageCommand(), EnumSet.of(User.UserRole.GUEST)),
     GO_TO_SIGN_UP_PAGE_COMMAND(new GoToSignUpPageCommand(), EnumSet.of(User.UserRole.GUEST)),
     GO_TO_INDEX_PAGE_COMMAND(new GoToIndexPageCommand(), EnumSet.of(User.UserRole.GUEST)),
