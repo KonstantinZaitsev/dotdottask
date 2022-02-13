@@ -35,7 +35,6 @@ public class AddTagCommand implements Command {
     public Router execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         String name = request.getParameter(ParameterName.NAME);
-        var ownerId = Long.parseLong(request.getParameter(ParameterName.OWNER_ID));
         var ownProjects = (List<Project>) session.getAttribute(AttributeName.OWN_PROJECTS);
         var projectId = Long.parseLong(request.getParameter(ParameterName.PROJECT_ID));
         var taskId = Long.parseLong(request.getParameter(ParameterName.TASK_ID));
