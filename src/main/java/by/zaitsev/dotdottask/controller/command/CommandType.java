@@ -14,6 +14,7 @@ import by.zaitsev.dotdottask.controller.command.impl.user.edit.EditImageCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.edit.EditNameCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.edit.EditPasswordCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.edit.EditSurnameCommand;
+import by.zaitsev.dotdottask.controller.command.impl.user.project.DeleteProjectCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.project.EditProjectDescriptionCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.project.EditProjectTitleCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.tag.EditTagNameCommand;
@@ -50,7 +51,8 @@ public enum CommandType {
     EDIT_TASK_DESCRIPTION_COMMAND(new EditTaskDescriptionCommand(), EnumSet.of(User.UserRole.USER)),
     EDIT_TASK_DEADLINE_COMMAND(new EditTaskDeadlineCommand(), EnumSet.of(User.UserRole.USER)),
     EDIT_TASK_IS_DONE_COMMAND(new EditTaskIsDoneCommand(), EnumSet.of(User.UserRole.USER)),
-    EDIT_TASK_ASSIGNED_USER_ID_COMMAND(new EditTaskAssignedUserIdCommand(), EnumSet.of(User.UserRole.USER));
+    EDIT_TASK_ASSIGNED_USER_ID_COMMAND(new EditTaskAssignedUserIdCommand(), EnumSet.of(User.UserRole.USER)),
+    DELETE_PROJECT_COMMAND(new DeleteProjectCommand(), EnumSet.of(User.UserRole.USER));
 
     private final Command command;
     private final EnumSet<User.UserRole> allowedRoles;
