@@ -29,6 +29,7 @@ public final class AttributeName {
     public static final String IMAGE = "image";
     public static final String UPDATE_TITLE_RESULT = "update_title_result";
     public static final String UPDATE_DESCRIPTION_RESULT = "update_description_result";
+    public static final String UPDATE_TAG_RESULT = "update_tag_result";
 
     private AttributeName() {
     }
