@@ -6,8 +6,10 @@ import by.zaitsev.dotdottask.model.dao.ProjectDao;
 import by.zaitsev.dotdottask.model.dao.impl.ProjectDaoImpl;
 import by.zaitsev.dotdottask.model.entity.Project;
 import by.zaitsev.dotdottask.model.entity.Task;
+import by.zaitsev.dotdottask.model.entity.User;
 import by.zaitsev.dotdottask.model.service.ProjectService;
 import by.zaitsev.dotdottask.model.service.TaskService;
+import by.zaitsev.dotdottask.model.service.UserService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +27,7 @@ public class ProjectServiceImpl implements ProjectService {
     private static ProjectServiceImpl instance;
     private final ProjectDao projectDao = ProjectDaoImpl.getInstance();
     private final TaskService taskService = TaskServiceImpl.getInstance();
+    private final UserService userService = UserServiceImpl.getInstance();
 
     private ProjectServiceImpl() {
     }
@@ -47,6 +50,8 @@ public class ProjectServiceImpl implements ProjectService {
             if (optionalProject.isPresent()) {
                 List<Task> taskList = taskService.findAllTasksByProjectId(id);
                 Project project = optionalProject.get();
+                List<User> userList = userService.findAllAssignedUsersByProjectId(project.getId());
+                project.setAssignedUserList(userList);
                 project.setTaskList(taskList);
                 optionalProject = Optional.of(project);
             }
@@ -66,6 +71,8 @@ public class ProjectServiceImpl implements ProjectService {
             projectList = projectDao.findAllEntities();
             for (Project project : projectList) {
                 List<Task> taskList = taskService.findAllTasksByProjectId(project.getId());
+                List<User> userList = userService.findAllAssignedUsersByProjectId(project.getId());
+                project.setAssignedUserList(userList);
                 project.setTaskList(taskList);
             }
             logger.log(Level.DEBUG, "findAllEntities() method was completed successfully");
@@ -113,6 +120,8 @@ public class ProjectServiceImpl implements ProjectService {
             projectList = projectDao.findAllUserOwnProjectsById(id);
             for (Project project : projectList) {
                 List<Task> taskList = taskService.findAllTasksByProjectId(project.getId());
+                List<User> userList = userService.findAllAssignedUsersByProjectId(project.getId());
+                project.setAssignedUserList(userList);
                 project.setTaskList(taskList);
             }
             logger.log(Level.DEBUG, "findAllUserOwnProjectsById(long id) method was completed successfully");
@@ -130,6 +139,8 @@ public class ProjectServiceImpl implements ProjectService {
             projectList = projectDao.findAllUserInvitedProjectsById(id);
             for (Project project : projectList) {
                 List<Task> taskList = taskService.findAllTasksByProjectId(project.getId());
+                List<User> userList = userService.findAllAssignedUsersByProjectId(project.getId());
+                project.setAssignedUserList(userList);
                 project.setTaskList(taskList);
             }
             logger.log(Level.DEBUG, "findAllUserInvitedProjectsById(long id) method was completed " +
