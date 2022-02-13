@@ -81,7 +81,7 @@ public final class SqlQuery {
                 FROM projects""";
         public static final String INSERT_NEW_ENTITY = """
                 INSERT INTO projects(owner_id, title, description)
-                VALUES (?, ?, ?, ?)""";
+                VALUES (?, ?, ?)""";
         public static final String DELETE_ENTITY_BY_ID = """
                 DELETE
                 FROM projects
@@ -177,7 +177,7 @@ public final class SqlQuery {
                 FROM tags""";
         public static final String INSERT_NEW_ENTITY = """
                 INSERT INTO tags(task_id, name)
-                VALUES (?, ?, ?)""";
+                VALUES (?, ?)""";
         public static final String DELETE_ENTITY_BY_ID = """
                 DELETE
                 FROM tags
