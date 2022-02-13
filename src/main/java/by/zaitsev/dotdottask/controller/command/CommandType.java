@@ -17,6 +17,7 @@ import by.zaitsev.dotdottask.controller.command.impl.user.edit.EditSurnameComman
 import by.zaitsev.dotdottask.controller.command.impl.user.project.EditProjectDescriptionCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.project.EditProjectTitleCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.tag.EditTagNameCommand;
+import by.zaitsev.dotdottask.controller.command.impl.user.task.EditTaskDescriptionCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.task.EditTaskTitleCommand;
 import by.zaitsev.dotdottask.model.entity.User;
 
@@ -46,7 +47,8 @@ public enum CommandType {
     EDIT_PROJECT_TITLE_COMMAND(new EditProjectTitleCommand(), EnumSet.of(User.UserRole.USER)),
     EDIT_PROJECT_DESCRIPTION_COMMAND(new EditProjectDescriptionCommand(), EnumSet.of(User.UserRole.USER)),
     EDIT_TAG_NAME_COMMAND(new EditTagNameCommand(), EnumSet.of(User.UserRole.USER)),
-    EDIT_TASK_TITLE_COMMAND(new EditTaskTitleCommand(), EnumSet.of(User.UserRole.USER));
+    EDIT_TASK_TITLE_COMMAND(new EditTaskTitleCommand(), EnumSet.of(User.UserRole.USER)),
+    EDIT_TASK_DESCRIPTION_COMMAND(new EditTaskDescriptionCommand(), EnumSet.of(User.UserRole.USER));
 
     private final Command command;
     private final EnumSet<User.UserRole> allowedRoles;
