@@ -21,6 +21,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * EditTaskDescriptionCommand is used to edit task description.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditTaskDescriptionCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditTaskDescriptionCommand.class);
 

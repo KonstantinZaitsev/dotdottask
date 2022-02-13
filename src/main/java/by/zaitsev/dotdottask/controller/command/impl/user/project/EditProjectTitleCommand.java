@@ -20,6 +20,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * EditProjectTitleCommand is used to edit project title.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditProjectTitleCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditProjectTitleCommand.class);
 

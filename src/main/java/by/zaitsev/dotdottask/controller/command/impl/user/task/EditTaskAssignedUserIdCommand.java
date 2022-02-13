@@ -23,6 +23,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * EditTaskAssignedUserIdCommand is used to edit task assigned user id.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditTaskAssignedUserIdCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditTaskAssignedUserIdCommand.class);
 

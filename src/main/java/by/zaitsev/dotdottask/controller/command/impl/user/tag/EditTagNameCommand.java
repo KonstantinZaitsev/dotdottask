@@ -22,6 +22,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * EditTagNameCommand is used to edit tag name.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditTagNameCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditTagNameCommand.class);
 

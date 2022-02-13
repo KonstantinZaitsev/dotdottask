@@ -20,6 +20,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * EditProjectDescriptionCommand is used to edit project description.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditProjectDescriptionCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditProjectDescriptionCommand.class);
 

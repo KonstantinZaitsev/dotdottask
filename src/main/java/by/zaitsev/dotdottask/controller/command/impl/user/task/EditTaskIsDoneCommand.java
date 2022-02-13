@@ -21,6 +21,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * EditTaskIsDoneCommand is used to edit task is done status.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditTaskIsDoneCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditTaskIsDoneCommand.class);
 

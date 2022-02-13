@@ -22,6 +22,11 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * EditTaskDeadlineCommand is used to edit task deadline.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditTaskDeadlineCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditTaskDeadlineCommand.class);
 

@@ -21,6 +21,11 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * EditTaskTitleCommand is used to edit task title.
+ *
+ * @author Konstantin Zaitsev
+ */
 public class EditTaskTitleCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditTaskTitleCommand.class);
 
