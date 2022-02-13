@@ -91,4 +91,12 @@ public interface UserDao extends BaseDao<User> {
      * @throws DaoException if the request to database could not be handled.
      */
     boolean deleteAssignedUserByProjectId(long projectId, long userId) throws DaoException;
+
+    /**
+     * @param projectId project at user will be added.
+     * @param userId    user id to add.
+     * @return true if the user has been added, otherwise false.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    boolean insertAssignedUserByProjectId(long projectId, long userId) throws DaoException;
 }

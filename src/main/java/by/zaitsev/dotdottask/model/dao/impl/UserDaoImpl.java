@@ -309,4 +309,23 @@ public class UserDaoImpl implements UserDao {
         }
         return isDeleted;
     }
+
+    @Override
+    public boolean insertAssignedUserByProjectId(long projectId, long userId) throws DaoException {
+        boolean isAdded;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Users.INSERT_ASSIGNED_USER_BY_PROJECT_ID)) {
+            preparedStatement.setLong(ParameterIndex.FIRST, projectId);
+            preparedStatement.setLong(ParameterIndex.SECOND, userId);
+            isAdded = preparedStatement.execute();
+            logger.log(Level.DEBUG, "insertAssignedUserByProjectId(long projectId, long userId) method was " +
+                    "completed successfully. " + (isAdded ? "User was added" : "User wasn't added"));
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to add to database. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to add user to database. Database access error: ", e);
+        }
+        return isAdded;
+    }
 }
