@@ -6,7 +6,9 @@ import by.zaitsev.dotdottask.exception.CommandException;
 import by.zaitsev.dotdottask.exception.ServiceException;
 import by.zaitsev.dotdottask.model.entity.Project;
 import by.zaitsev.dotdottask.model.entity.Task;
+import by.zaitsev.dotdottask.model.entity.User;
 import by.zaitsev.dotdottask.model.service.impl.TaskServiceImpl;
+import by.zaitsev.dotdottask.model.service.impl.UserServiceImpl;
 import by.zaitsev.dotdottask.util.AttributeName;
 import by.zaitsev.dotdottask.util.PagePath;
 import by.zaitsev.dotdottask.util.ParameterName;
@@ -39,7 +41,7 @@ public class AddTaskCommand implements Command {
         String title = request.getParameter(ParameterName.TITLE);
         String description = request.getParameter(ParameterName.DESCRIPTION);
         String deadline = request.getParameter(ParameterName.DEADLINE);
-        var assignedUserId = Long.parseLong(request.getParameter(ParameterName.ASSIGNED_USER_ID));
+        String assignedUserEmail = request.getParameter(ParameterName.ASSIGNED_USER_EMAIL);
         var projectId = Long.parseLong(request.getParameter(ParameterName.PROJECT_ID));
         var ownProjects = (List<Project>) session.getAttribute(AttributeName.OWN_PROJECTS);
         Optional<Project> optionalProject = ownProjects
@@ -55,9 +57,13 @@ public class AddTaskCommand implements Command {
         }
         var taskValidator = TaskValidator.getInstance();
         try {
+            long assignedUserId;
+            Optional<User> optionalUser = UserServiceImpl.getInstance().findUserByEmail(assignedUserEmail);
             if (taskValidator.isTitleValid(title) &&
                     taskValidator.isDescriptionValid(description) &&
-                    taskValidator.isDeadlineValid(deadline)) {
+                    taskValidator.isDeadlineValid(deadline) &&
+                    optionalUser.isPresent()) {
+                assignedUserId = optionalUser.get().getId();
                 var task = new Task();
                 task.setProjectId(project.getId());
                 task.setTitle(title);
