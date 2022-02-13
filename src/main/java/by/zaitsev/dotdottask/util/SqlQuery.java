@@ -60,6 +60,12 @@ public final class SqlQuery {
                 UPDATE users
                 SET email = ?
                 WHERE user_id = ?""";
+        public static final String FIND_ALL_ASSIGNED_USERS_BY_PROJECT_ID = """
+                SELECT users.user_id, email, encrypted_password, name, surname, image
+                FROM users
+                         LEFT JOIN projects_users ON users.user_id = projects_users.user_id
+                         LEFT JOIN projects ON projects_users.project_id = projects.project_id
+                WHERE projects.project_id = ?""";
 
         private Users() {
         }
