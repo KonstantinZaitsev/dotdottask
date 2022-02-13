@@ -53,7 +53,8 @@ public enum CommandType {
     EDIT_TASK_IS_DONE_COMMAND(new EditTaskIsDoneCommand(), EnumSet.of(User.UserRole.USER)),
     EDIT_TASK_ASSIGNED_USER_ID_COMMAND(new EditTaskAssignedUserIdCommand(), EnumSet.of(User.UserRole.USER)),
     DELETE_PROJECT_COMMAND(new DeleteProjectCommand(), EnumSet.of(User.UserRole.USER)),
-    DELETE_TAG_COMMAND(new DeleteProjectCommand(), EnumSet.of(User.UserRole.USER));
+    DELETE_TAG_COMMAND(new DeleteProjectCommand(), EnumSet.of(User.UserRole.USER)),
+    DELETE_TASK_COMMAND(new DeleteTaskCommand(), EnumSet.of(User.UserRole.USER));
 
     private final Command command;
     private final EnumSet<User.UserRole> allowedRoles;
