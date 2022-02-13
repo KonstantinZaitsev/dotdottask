@@ -35,6 +35,7 @@ public final class AttributeName {
     public static final String UPDATE_TASK_DEADLINE_RESULT = "update_task_deadline_result";
     public static final String UPDATE_TASK_IS_DONE_RESULT = "update_task_is_done_result";
     public static final String UPDATE_TASK_ASSIGNED_USER_ID_RESULT = "update_task_assigned_user_id_result";
+    public static final String ADD_PROJECT_RESULT = "add_project_result";
 
     private AttributeName() {
     }
