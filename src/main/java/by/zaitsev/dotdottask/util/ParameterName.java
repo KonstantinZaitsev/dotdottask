@@ -21,6 +21,7 @@ public final class ParameterName {
     public static final String DEADLINE = "deadline";
     public static final String IS_DONE = "is_done";
     public static final String ASSIGNED_USER_ID = "assigned_user_id";
+    public static final String OWNER_ID = "owner_id";
 
     private ParameterName() {
     }
