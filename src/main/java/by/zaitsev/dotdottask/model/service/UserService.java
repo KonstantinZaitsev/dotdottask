@@ -85,4 +85,12 @@ public interface UserService extends BaseService<User> {
      * @throws ServiceException if the request to Dao class could not be handled.
      */
     List<User> findAllAssignedUsersByProjectId(long id) throws ServiceException;
+
+    /**
+     * @param projectId project from user will be deleted.
+     * @param userId    user id to delete.
+     * @return true if the user has been deleted, otherwise false.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    boolean deleteAssignedUserByProjectId(long projectId, long userId) throws ServiceException;
 }

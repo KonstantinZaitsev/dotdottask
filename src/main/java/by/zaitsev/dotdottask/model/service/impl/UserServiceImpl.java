@@ -268,4 +268,19 @@ public class UserServiceImpl implements UserService {
         }
         return userList;
     }
+
+    @Override
+    public boolean deleteAssignedUserByProjectId(long projectId, long userId) throws ServiceException {
+        boolean isDeleted;
+        try {
+            isDeleted = userDao.deleteAssignedUserByProjectId(projectId, userId);
+            logger.log(Level.DEBUG, "deleteAssignedUserByProjectId(long projectId, long userId) method was " +
+                    "completed successfully. " + (isDeleted ? "User was deleted" : "User wasn't deleted"));
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to delete user from database. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to delete user from database. Dao access error: ", e);
+        }
+        return isDeleted;
+    }
 }
