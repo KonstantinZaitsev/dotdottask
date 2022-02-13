@@ -37,7 +37,8 @@ public enum CommandType {
     EDIT_EMAIL_COMMAND(new EditEmailCommand(), EnumSet.of(User.UserRole.USER)),
     EDIT_PASSWORD_COMMAND(new EditPasswordCommand(), EnumSet.of(User.UserRole.USER)),
     EDIT_IMAGE_COMMAND(new EditImageCommand(), EnumSet.of(User.UserRole.USER)),
-    EDIT_PROJECT_TITLE_COMMAND(new EditProjectTitleCommand(), EnumSet.of(User.UserRole.USER));
+    EDIT_PROJECT_TITLE_COMMAND(new EditProjectTitleCommand(), EnumSet.of(User.UserRole.USER)),
+    EDIT_PROJECT_DESCRIPTION_COMMAND(new EditProjectDescriptionCommand(), EnumSet.of(User.UserRole.USER));
 
     private final Command command;
     private final EnumSet<User.UserRole> allowedRoles;
