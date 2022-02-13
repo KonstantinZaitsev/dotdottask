@@ -71,6 +71,9 @@ public final class SqlQuery {
                 FROM projects_users
                 WHERE project_id = ?
                   AND user_id = ?""";
+        public static final String INSERT_ASSIGNED_USER_BY_PROJECT_ID = """
+                INSERT INTO projects_users(project_id, user_id)
+                VALUES (?, ?)""";
 
         private Users() {
         }
