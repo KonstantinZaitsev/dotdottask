@@ -283,4 +283,19 @@ public class UserServiceImpl implements UserService {
         }
         return isDeleted;
     }
+
+    @Override
+    public boolean insertAssignedUserByProjectId(long projectId, long userId) throws ServiceException {
+        boolean isAdded;
+        try {
+            isAdded = userDao.insertAssignedUserByProjectId(projectId, userId);
+            logger.log(Level.DEBUG, "insertAssignedUserByProjectId(long projectId, long userId) method was " +
+                    "completed successfully. " + (isAdded ? "User was added" : "User wasn't added"));
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to add user to database. Dao access error: {}",
+                    e.getMessage());
+            throw new ServiceException("Unable to add user to database. Dao access error: ", e);
+        }
+        return isAdded;
+    }
 }

@@ -93,4 +93,12 @@ public interface UserService extends BaseService<User> {
      * @throws ServiceException if the request to Dao class could not be handled.
      */
     boolean deleteAssignedUserByProjectId(long projectId, long userId) throws ServiceException;
+
+    /**
+     * @param projectId project at user will be added.
+     * @param userId    user id to add.
+     * @return true if the user has been added, otherwise false.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    boolean insertAssignedUserByProjectId(long projectId, long userId) throws ServiceException;
 }
