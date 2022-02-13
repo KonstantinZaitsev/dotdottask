@@ -14,14 +14,17 @@ import by.zaitsev.dotdottask.controller.command.impl.user.edit.EditImageCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.edit.EditNameCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.edit.EditPasswordCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.edit.EditSurnameCommand;
-import by.zaitsev.dotdottask.controller.command.impl.user.project.AddProjectCommand;
-import by.zaitsev.dotdottask.controller.command.impl.user.project.DeleteProjectCommand;
-import by.zaitsev.dotdottask.controller.command.impl.user.project.EditProjectDescriptionCommand;
-import by.zaitsev.dotdottask.controller.command.impl.user.project.EditProjectTitleCommand;
+import by.zaitsev.dotdottask.controller.command.impl.user.project.*;
 import by.zaitsev.dotdottask.controller.command.impl.user.tag.AddTagCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.tag.DeleteTagCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.tag.EditTagNameCommand;
-import by.zaitsev.dotdottask.controller.command.impl.user.task.*;
+import by.zaitsev.dotdottask.controller.command.impl.user.task.AddTaskCommand;
+import by.zaitsev.dotdottask.controller.command.impl.user.task.DeleteTaskCommand;
+import by.zaitsev.dotdottask.controller.command.impl.user.task.EditTaskAssignedUserIdCommand;
+import by.zaitsev.dotdottask.controller.command.impl.user.task.EditTaskDeadlineCommand;
+import by.zaitsev.dotdottask.controller.command.impl.user.task.EditTaskDescriptionCommand;
+import by.zaitsev.dotdottask.controller.command.impl.user.task.EditTaskIsDoneCommand;
+import by.zaitsev.dotdottask.controller.command.impl.user.task.EditTaskTitleCommand;
 import by.zaitsev.dotdottask.model.entity.User;
 
 import java.util.EnumSet;
@@ -60,7 +63,8 @@ public enum CommandType {
     DELETE_TASK_COMMAND(new DeleteTaskCommand(), EnumSet.of(User.UserRole.USER)),
     ADD_PROJECT_COMMAND(new AddProjectCommand(), EnumSet.of(User.UserRole.USER)),
     ADD_TAG_COMMAND(new AddTagCommand(), EnumSet.of(User.UserRole.USER)),
-    ADD_TASK_COMMAND(new AddTaskCommand(), EnumSet.of(User.UserRole.USER));
+    ADD_TASK_COMMAND(new AddTaskCommand(), EnumSet.of(User.UserRole.USER)),
+    DELETE_ASSIGNED_USER_COMMAND(new DeleteAssignedUserCommand(), EnumSet.of(User.UserRole.USER));
 
     private final Command command;
     private final EnumSet<User.UserRole> allowedRoles;
@@ -77,4 +81,4 @@ public enum CommandType {
     public EnumSet<User.UserRole> getAllowedRoles() {
         return allowedRoles;
     }
-    }
+}
