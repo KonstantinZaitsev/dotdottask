@@ -13,6 +13,9 @@ public final class ParameterName {
     public static final String CONFIRMED_PASSWORD = "confirmed_password";
     public static final String NAME = "name";
     public static final String SURNAME = "surname";
+    public static final String ID = "id";
+    public static final String TITLE = "title";
+    public static final String DESCRIPTION = "description";
 
     private ParameterName() {
     }
