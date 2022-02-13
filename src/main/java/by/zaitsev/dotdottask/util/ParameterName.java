@@ -19,6 +19,7 @@ public final class ParameterName {
     public static final String TASK_ID = "task_id";
     public static final String TAG_ID = "tag_id";
     public static final String DEADLINE = "deadline";
+    public static final String IS_DONE = "is_done";
 
     private ParameterName() {
     }
