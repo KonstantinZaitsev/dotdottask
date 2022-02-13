@@ -16,6 +16,8 @@ public final class ParameterName {
     public static final String PROJECT_ID = "project_id";
     public static final String TITLE = "title";
     public static final String DESCRIPTION = "description";
+    public static final String TASK_ID = "task_id";
+    public static final String TAG_ID = "tag_id";
 
     private ParameterName() {
     }
