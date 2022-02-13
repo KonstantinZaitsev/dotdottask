@@ -31,6 +31,7 @@ public final class AttributeName {
     public static final String UPDATE_PROJECT_DESCRIPTION_RESULT = "update_project_description_result";
     public static final String UPDATE_TAG_NAME_RESULT = "update_tag_name_result";
     public static final String UPDATE_TASK_TITLE_RESULT = "update_task_title_result";
+    public static final String UPDATE_TASK_DESCRIPTION_RESULT = "update_task_description_result";
 
     private AttributeName() {
     }
