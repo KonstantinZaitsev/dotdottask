@@ -14,8 +14,8 @@ import org.apache.logging.log4j.Logger;
  *
  * @author Konstantin Zaitsev
  */
-public class GoToCatalogPagePathCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(GoToCatalogPagePathCommand.class);
+public class GoToCatalogPageCommand implements Command {
+    private static final Logger logger = LogManager.getLogger(GoToCatalogPageCommand.class);
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
