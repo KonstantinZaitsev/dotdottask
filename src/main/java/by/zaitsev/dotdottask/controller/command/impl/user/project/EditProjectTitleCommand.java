@@ -29,7 +29,7 @@ public class EditProjectTitleCommand implements Command {
         HttpSession session = request.getSession();
         var ownProjects = (List<Project>) session.getAttribute(AttributeName.OWN_PROJECTS);
         String title = request.getParameter(ParameterName.TITLE);
-        var projectId = Long.parseLong(request.getParameter(ParameterName.ID));
+        var projectId = Long.parseLong(request.getParameter(ParameterName.PROJECT_ID));
         Optional<Project> optionalProject = ownProjects
                 .stream()
                 .filter(value -> value.getId() == projectId)
