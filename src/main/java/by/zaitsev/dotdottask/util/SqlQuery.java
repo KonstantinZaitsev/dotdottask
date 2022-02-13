@@ -66,6 +66,11 @@ public final class SqlQuery {
                          LEFT JOIN projects_users ON users.user_id = projects_users.user_id
                          LEFT JOIN projects ON projects_users.project_id = projects.project_id
                 WHERE projects.project_id = ?""";
+        public static final String DELETE_ASSIGNED_USER_BY_PROJECT_ID = """
+                DELETE
+                FROM projects_users
+                WHERE project_id = ?
+                  AND user_id = ?""";
 
         private Users() {
         }
