@@ -4,6 +4,7 @@ import by.zaitsev.dotdottask.exception.ServiceException;
 import by.zaitsev.dotdottask.model.entity.User;
 import by.zaitsev.dotdottask.model.dao.UserDao;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -47,8 +48,8 @@ public interface UserService extends BaseService<User> {
     boolean updateUserSurnameById(long id, String surname) throws ServiceException;
 
     /**
-     * @param id                user id to update.
-     * @param password          new user's password.
+     * @param id       user id to update.
+     * @param password new user's password.
      * @return true if the user has been updated, otherwise false.
      * @throws ServiceException if the request to Dao class could not be handled.
      */
@@ -63,7 +64,7 @@ public interface UserService extends BaseService<User> {
     boolean updateUserImageById(long id, byte[] image) throws ServiceException;
 
     /**
-     * @param id user id to update.
+     * @param id    user id to update.
      * @param email new user's email.
      * @return true if the user has been updated, otherwise false.
      * @throws ServiceException if the request to Dao class could not be handled.
@@ -77,4 +78,11 @@ public interface UserService extends BaseService<User> {
      * @throws ServiceException if the request to Dao class could not be handled.
      */
     Optional<User> findUserByEmail(String email) throws ServiceException;
+
+    /**
+     * @param id project id to find users.
+     * @return list of found users.
+     * @throws ServiceException if the request to Dao class could not be handled.
+     */
+    List<User> findAllAssignedUsersByProjectId(long id) throws ServiceException;
 }

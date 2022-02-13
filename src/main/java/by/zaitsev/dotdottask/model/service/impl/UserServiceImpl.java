@@ -254,4 +254,18 @@ public class UserServiceImpl implements UserService {
         }
         return optionalUser;
     }
+
+    @Override
+    public List<User> findAllAssignedUsersByProjectId(long id) throws ServiceException {
+        List<User> userList;
+        try {
+            userList = userDao.findAllAssignedUsersByProjectId(id);
+            logger.log(Level.DEBUG, "findAllAssignedUsersByProjectId(long id) method was completed " +
+                    "successfully");
+        } catch (DaoException e) {
+            logger.log(Level.ERROR, "Unable to find all assigned users. Dao access error: {}", e.getMessage());
+            throw new ServiceException("Unable to find all assigned users. Dao access error: ", e);
+        }
+        return userList;
+    }
 }
