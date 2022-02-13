@@ -38,6 +38,8 @@ public final class AttributeName {
     public static final String ADD_PROJECT_RESULT = "add_project_result";
     public static final String ADD_TAG_RESULT = "add_tag_result";
     public static final String ADD_TASK_RESULT = "add_task_result";
+    public static final String ADD_ASSIGNED_USER_RESULT = "add_assigned_user_result";
+    public static final String DELETE_ASSIGNED_USER_RESULT = "delete_assigned_user_result";
 
     private AttributeName() {
     }
