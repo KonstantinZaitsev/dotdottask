@@ -290,4 +290,23 @@ public class UserDaoImpl implements UserDao {
         }
         return userList;
     }
+
+    @Override
+    public boolean deleteAssignedUserByProjectId(long projectId, long userId) throws DaoException {
+        boolean isDeleted;
+        try (var connection = connectionPool.getConnection();
+             var preparedStatement = connection.prepareStatement(
+                     SqlQuery.Users.DELETE_ASSIGNED_USER_BY_PROJECT_ID)) {
+            preparedStatement.setLong(ParameterIndex.FIRST, projectId);
+            preparedStatement.setLong(ParameterIndex.SECOND, userId);
+            isDeleted = preparedStatement.execute();
+            logger.log(Level.DEBUG, "deleteAssignedUserByProjectId(long projectId, long userId) method was " +
+                    "completed successfully. " + (isDeleted ? "User was deleted" : "User wasn't deleted"));
+        } catch (SQLException e) {
+            logger.log(Level.ERROR, "Unable to delete user from database. Database access error: {}",
+                    e.getMessage());
+            throw new DaoException("Unable to delete user from database. Database access error: ", e);
+        }
+        return isDeleted;
+    }
 }

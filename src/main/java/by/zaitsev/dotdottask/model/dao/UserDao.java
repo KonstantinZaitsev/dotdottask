@@ -83,4 +83,12 @@ public interface UserDao extends BaseDao<User> {
      * @throws DaoException if the request to database could not be handled.
      */
     List<User> findAllAssignedUsersByProjectId(long id) throws DaoException;
+
+    /**
+     * @param projectId project from user will be deleted.
+     * @param userId    user id to delete.
+     * @return true if the user has been deleted, otherwise false.
+     * @throws DaoException if the request to database could not be handled.
+     */
+    boolean deleteAssignedUserByProjectId(long projectId, long userId) throws DaoException;
 }
