@@ -10,6 +10,8 @@ import by.zaitsev.dotdottask.controller.command.impl.navigation.GoToSignInPageCo
 import by.zaitsev.dotdottask.controller.command.impl.navigation.GoToSignUpPageCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.SignOutCommand;
 import by.zaitsev.dotdottask.controller.command.impl.user.edit.*;
+import by.zaitsev.dotdottask.controller.command.impl.user.project.EditProjectDescriptionCommand;
+import by.zaitsev.dotdottask.controller.command.impl.user.project.EditProjectTitleCommand;
 import by.zaitsev.dotdottask.model.entity.User;
 
 import java.util.EnumSet;
@@ -34,7 +36,8 @@ public enum CommandType {
     EDIT_SURNAME_COMMAND(new EditSurnameCommand(), EnumSet.of(User.UserRole.USER)),
     EDIT_EMAIL_COMMAND(new EditEmailCommand(), EnumSet.of(User.UserRole.USER)),
     EDIT_PASSWORD_COMMAND(new EditPasswordCommand(), EnumSet.of(User.UserRole.USER)),
-    EDIT_IMAGE_COMMAND(new EditImageCommand(), EnumSet.of(User.UserRole.USER));
+    EDIT_IMAGE_COMMAND(new EditImageCommand(), EnumSet.of(User.UserRole.USER)),
+    EDIT_PROJECT_TITLE_COMMAND(new EditProjectTitleCommand(), EnumSet.of(User.UserRole.USER));
 
     private final Command command;
     private final EnumSet<User.UserRole> allowedRoles;
