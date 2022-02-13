@@ -13,6 +13,7 @@ public class Project extends AbstractEntity {
     private String title;
     private String description;
     private List<Task> taskList;
+    private List<User> assignedUserList;
 
     public long getOwnerId() {
         return ownerId;
@@ -46,6 +47,14 @@ public class Project extends AbstractEntity {
         this.taskList = taskList;
     }
 
+    public List<User> getAssignedUserList() {
+        return assignedUserList;
+    }
+
+    public void setAssignedUserList(List<User> assignedUserList) {
+        this.assignedUserList = assignedUserList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -61,7 +70,9 @@ public class Project extends AbstractEntity {
         return ownerId == that.ownerId &&
                 title != null ? title.equals(that.title) : that.title == null &&
                 description != null ? description.equals(that.description) : that.description == null &&
-                taskList != null ? taskList.equals(that.taskList) : that.taskList == null;
+                taskList != null ? taskList.equals(that.taskList) : that.taskList == null &&
+                assignedUserList != null ?
+                assignedUserList.equals(that.assignedUserList) : that.assignedUserList == null;
     }
 
     @Override
@@ -71,6 +82,7 @@ public class Project extends AbstractEntity {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (taskList != null ? taskList.hashCode() : 0);
+        result = 31 * result + (assignedUserList != null ? assignedUserList.hashCode() : 0);
         return result;
     }
 
@@ -82,6 +94,7 @@ public class Project extends AbstractEntity {
                 .add("title='" + title + "'")
                 .add("description='" + description + "'")
                 .add("taskList=" + taskList)
+                .add("assignedUserList=" + assignedUserList)
                 .toString();
     }
 }
