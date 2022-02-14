@@ -12,7 +12,7 @@ import by.zaitsev.dotdottask.model.service.impl.UserServiceImpl;
 import by.zaitsev.dotdottask.util.AttributeName;
 import by.zaitsev.dotdottask.util.PagePath;
 import by.zaitsev.dotdottask.util.ParameterName;
-import by.zaitsev.dotdottask.util.validator.TaskValidator;
+import by.zaitsev.dotdottask.util.validator.UserValidator;
 import by.zaitsev.dotdottask.util.validator.ValidationResult;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -36,7 +36,7 @@ public class EditTaskAssignedUserIdCommand implements Command {
     public Router execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         var ownProjects = (List<Project>) session.getAttribute(AttributeName.OWN_PROJECTS);
-        var assignedUserId = Long.parseLong(request.getParameter(ParameterName.ASSIGNED_USER_ID));
+        String email = request.getParameter(ParameterName.ASSIGNED_USER_EMAIL);
         var projectId = Long.parseLong(request.getParameter(ParameterName.PROJECT_ID));
         var taskId = Long.parseLong(request.getParameter(ParameterName.TASK_ID));
         Optional<Project> optionalProject = ownProjects
@@ -44,11 +44,13 @@ public class EditTaskAssignedUserIdCommand implements Command {
                 .filter(value -> value.getId() == projectId)
                 .findFirst();
         Optional<Task> optionalTask;
+        Project project;
         if (optionalProject.isPresent()) {
             optionalTask = optionalProject.get().getTaskList()
                     .stream()
                     .filter(value -> value.getId() == taskId)
                     .findFirst();
+            project = optionalProject.get();
         } else {
             logger.log(Level.ERROR, "Cannot update task assigned user id, there are no project with id {}",
                     projectId);
@@ -62,12 +64,14 @@ public class EditTaskAssignedUserIdCommand implements Command {
                     taskId);
             throw new CommandException("Cannot update task assigned user id, there are no task with id " + taskId);
         }
-        var taskValidator = TaskValidator.getInstance();
+        var userValidator = UserValidator.getInstance();
         try {
-            Optional<User> user = UserServiceImpl.getInstance().findEntityById(assignedUserId);
-            if (user.isPresent()) {
-                TaskServiceImpl.getInstance().updateTaskAssignedUserIdById(taskId, assignedUserId);
-                task.setAssignedUserId(assignedUserId);
+            Optional<User> user = UserServiceImpl.getInstance().findUserByEmail(email);
+            if (userValidator.isEmailValid(email) &&
+                    user.isPresent() &&
+                    project.getAssignedUserList().contains(user.get())) {
+                TaskServiceImpl.getInstance().updateTaskAssignedUserIdById(taskId, user.get().getId());
+                task.setAssignedUserId(user.get().getId());
                 logger.log(Level.DEBUG, "execute(HttpServletRequest request) method was completed " +
                         "successfully. Forwarded to catalog page");
             } else {
