@@ -126,9 +126,11 @@
                                     ${project.title}
                             </button>
                             <div class="collapse" id="project-${project.id}">
-                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small nav-tabs flex-column nav"
+                                    role="tablist">
                                     <c:forEach items="${project.taskList}" var="task">
-                                        <li><a href="#" class="link-dark rounded">${task.title}</a></li>
+                                        <li class="nav-item"><a href="#task-info-${task.id}" class="link-dark rounded"
+                                                                role="tab" data-bs-toggle="tab">${task.title}</a></li>
                                     </c:forEach>
                                 </ul>
                             </div>
@@ -935,6 +937,64 @@
 
     <div class="tab-content">
         <c:forEach items="${sessionScope.own_projects}" var="project">
+            <c:forEach items="${project.taskList}" var="task">
+                <div id="task-info-${task.id}" class="tab-pane fade" role="tabpanel">
+                    <div class="text-center">
+                        <h1 style="font-style: italic"><strong>${project.title}</strong></h1>
+                        <p>${project.description}</p>
+                        <div class="border-top my-3"></div>
+                        <h1><strong>${task.title}</strong></h1>
+                        <div class="border-top my-3"></div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h4><strong>${creation_date}:</strong></h4>
+                                <p>${task.creationDate}</p>
+                            </div>
+                            <div class="col-6">
+                                <h4><strong>${deadline}:</strong></h4>
+                                <p>${task.deadline}</p>
+                            </div>
+                            <div class="col-6">
+                                <c:choose>
+                                    <c:when test="${task.assignedUserId eq user.id}">
+                                        <h4><strong>${assigned}</strong></h4>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h4><strong>${not_assigned}</strong></h4>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                            <div class="col-6">
+                                <c:choose>
+                                    <c:when test="${task.isDone()}">
+                                        <h4><strong>${done}</strong></h4>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h4><strong>${not_done}</strong></h4>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-top my-3"></div>
+                    <div class="row align-items-start">
+                        <c:forEach items="${task.tagList}" var="tag">
+                            <div class="alert alert-info text-center" style="width: 40%; margin: 20px" role="alert">
+                                    ${tag.name}
+                            </div>
+                        </c:forEach>
+                    </div>
+                    <div class="border-top my-3"></div>
+                    <div>
+                        <p>${task.description}</p>
+                    </div>
+                </div>
+            </c:forEach>
+        </c:forEach>
+    </div>
+
+    <div class="tab-content">
+        <c:forEach items="${sessionScope.invited_projects}" var="project">
             <c:forEach items="${project.taskList}" var="task">
                 <div id="task-info-${task.id}" class="tab-pane fade" role="tabpanel">
                     <div class="text-center">
